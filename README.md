@@ -21,14 +21,30 @@ The presentation is hosted on GitHub Pages at: [https://YOUR-USERNAME.github.io/
 
 Or open `index.html` locally in your web browser.
 
+## Setup
+
+First time setup:
+```bash
+npm install
+npm run build
+```
+
 ## Local Development
 
-No build process required! Simply open `index.html` in a web browser.
+The presentation uses pre-compiled JavaScript for reliable loading.
+
+**To view the presentation:**
+Simply open `index.html` in a web browser.
+
+**To make changes:**
+1. Edit `AI_Accessibility_Presentation.jsx`
+2. Run the build command: `npm run build`
+3. Refresh your browser
 
 The presentation uses:
 - React 18 (via CDN)
-- Babel Standalone for JSX transformation
-- Pure client-side rendering
+- esbuild for JSX compilation
+- Pre-compiled JavaScript for reliable GitHub Pages hosting
 
 ## Publishing to GitHub Pages
 
@@ -55,13 +71,15 @@ Your presentation will be live at `https://YOUR-USERNAME.github.io/ai-math-acces
 
 ```
 .
-├── index.html                            # Self-contained presentation (HTML + inlined React component)
-├── AI_Accessibility_Presentation.jsx     # Source JSX file (for reference/editing)
+├── index.html                            # Main HTML file
+├── presentation.js                       # Compiled React component (generated)
+├── AI_Accessibility_Presentation.jsx     # Source JSX file - edit this!
+├── package.json                          # Build configuration
 ├── workshop-planning-document.md         # Workshop planning notes
 └── README.md                             # This file
 ```
 
-**Note:** The presentation is entirely self-contained in `index.html`. The JSX file is kept as a source reference.
+**Important:** Edit `AI_Accessibility_Presentation.jsx` and run `npm run build` to update the presentation.
 
 ## License
 

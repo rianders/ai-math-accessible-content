@@ -1,0 +1,11 @@
+{
+  "name": "ai-accessibility-presentation",
+  "version": "1.0.0",
+  "description": "AI as An Accessibility Improvement Tool - Interactive Presentation",
+  "scripts": {
+    "build": "esbuild AI_Accessibility_Presentation.jsx --bundle --outfile=presentation.js --format=iife --global-name=PresentationModule --external:react --external:react-dom"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.0"
+  }
+}

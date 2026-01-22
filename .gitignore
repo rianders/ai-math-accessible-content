@@ -1,3 +1,7 @@
+# Dependencies
+node_modules/
+package-lock.json
+
 # OS files
 .DS_Store
 Thumbs.db
@@ -12,3 +16,6 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.log
+test.html
+index-debug.html
+index-compiled.html
