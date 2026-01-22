@@ -32,11 +32,2691 @@
 <body>
     <div id="root"></div>
 
-    <!-- Load the presentation component -->
-    <script type="text/babel" src="AI_Accessibility_Presentation.jsx"></script>
-
-    <!-- Mount the app -->
+    <!-- Presentation component inlined -->
     <script type="text/babel">
+const { useState, useEffect, useCallback } = React;
+
+const slides = [
+  // ACT 1: THE CHALLENGE
+  {
+    id: 1,
+    type: 'title',
+    title: 'AI as An Accessibility Improvement Tool',
+    subtitle: 'Bridging the gap when built-in tools fall short—focusing on math notation, handwritten content, and complex visuals',
+    presenter: 'Rick Anderson & Suparna Sinha',
+    org: 'Office of University Online Education Services',
+    date: 'January 23, 2025'
+  },
+  {
+    id: 2,
+    type: 'agenda',
+    title: 'Workshop Agenda',
+    duration: '90 minutes',
+    sections: [
+      { name: 'The Challenge', desc: 'ADA requirements and what content needs to be accessible', time: '10 min' },
+      { name: 'The Gap', desc: 'Where built-in tools fail us—math, handwriting, graphs', time: '15 min' },
+      { name: 'The Solution', desc: 'AI-assisted workflows and prompt frameworks', time: '25 min' },
+      { name: 'Hands-On Practice', desc: 'Try the tools with your own challenging content', time: '30 min' },
+      { name: 'Wrap-Up', desc: 'Discussion, resources, and next steps', time: '10 min' }
+    ]
+  },
+  {
+    id: 3,
+    type: 'objectives',
+    title: 'Workshop Objectives',
+    subtitle: 'By the end of this session, you will be able to:',
+    items: [
+      { verb: 'Evaluate', text: 'where built-in tools succeed and where they fail' },
+      { verb: 'Identify', text: '"hard cases" for accessibility: math notation, handwriting, complex graphs' },
+      { verb: 'Apply', text: 'AI-assisted workflows to transform inaccessible content' },
+      { verb: 'Write', text: 'effective prompts for STEM accessibility using our framework' },
+      { verb: 'Understand', text: 'the Markdown → HTML/MathML → Canvas pipeline' }
+    ]
+  },
+  {
+    id: 4,
+    type: 'alert',
+    title: 'The Accessibility Imperative',
+    headline: 'Making Learning Accessible for All: Meeting ADA Title II Standards',
+    deadline: 'Critical Deadline: April 24, 2026',
+    question: 'How do we ensure ALL course content—including the hard stuff—is accessible?'
+  },
+  {
+    id: 5,
+    type: 'content-challenges',
+    title: 'What Content Needs to be Accessible?',
+    intro: 'Existing tools move us a long way toward our goal, but each content type has difficult edge cases:',
+    items: [
+      { type: 'Audio', desc: 'Transcripts, screen reader compatibility', challenge: 'Technical jargon, accents, multiple speakers' },
+      { type: 'Video', desc: 'Captions, audio descriptions', challenge: 'Visual demos, notation on screen, fast-paced content' },
+      { type: 'Images', desc: 'Alt text, long descriptions', challenge: 'Handwriting, equations, complex diagrams' },
+      { type: 'PDFs', desc: 'Tagged structure, reading order', challenge: 'Scanned documents, multi-column layouts, forms' },
+      { type: 'Presentations', desc: 'Slide structure, image descriptions', challenge: 'Embedded media, animations, speaker notes context' }
+    ],
+    note: 'Today we focus on the image challenges—particularly math notation and handwritten content—where AI tools can help bridge the gap.'
+  },
+  {
+    id: 6,
+    type: 'toolkit',
+    title: 'Our Existing Toolkit at Rutgers',
+    intro: 'These built-in tools handle standard accessibility tasks well:',
+    columns: [
+      {
+        heading: 'Canvas & ALLY',
+        items: [
+          'Accessibility score indicators',
+          'Auto-generated alt text suggestions',
+          'Alternative format downloads',
+          'Document structure checking'
+        ]
+      },
+      {
+        heading: 'Microsoft 365',
+        items: [
+          'PowerPoint alt-text generator',
+          'Accessibility Checker',
+          'Immersive Reader',
+          'Auto-captions in video'
+        ]
+      }
+    ]
+  },
+  {
+    id: 7,
+    type: 'standards',
+    title: 'Our Target: WCAG Standards',
+    subtitle: 'POUR Principles',
+    principles: [
+      { letter: 'P', name: 'Perceivable', desc: 'Content works for all senses—alt text, captions, good contrast' },
+      { letter: 'O', name: 'Operable', desc: 'Keyboard accessible, enough time to interact' },
+      { letter: 'U', name: 'Understandable', desc: 'Clear language, predictable layout' },
+      { letter: 'R', name: 'Robust', desc: 'Works across devices and assistive technologies' }
+    ]
+  },
+  {
+    id: 8,
+    type: 'success-with-examples',
+    title: 'Where Built-in Tools Excel',
+    intro: 'ALLY and PowerPoint handle these well:',
+    items: [
+      { icon: '✓', text: 'Standard photographs with clear subjects' },
+      { icon: '✓', text: 'Simple diagrams and flowcharts' },
+      { icon: '✓', text: 'Typed text documents' },
+      { icon: '✓', text: 'Basic charts with clear labels' },
+      { icon: '✓', text: 'Decorative images (mark as decorative)' }
+    ],
+    conclusion: 'For typical course content, these tools get you 80% of the way there.',
+    placeholder: {
+      type: 'screenshots',
+      instruction: 'ADD SCREENSHOTS: ALLY success examples in Canvas',
+      suggestions: [
+        'ALLY accessibility score indicator (green) on a standard image',
+        'ALLY auto-generated alt text for a photograph',
+        'PowerPoint accessibility checker passing'
+      ]
+    }
+  },
+
+  // ACT 2: THE GAP
+  {
+    id: 9,
+    type: 'problem-with-examples',
+    title: 'Where Built-in Tools Fail Us',
+    intro: 'But what about content like this?',
+    items: [
+      { icon: '✗', text: 'Handwritten notes and annotations', example: 'Lecture notes, student work' },
+      { icon: '✗', text: 'Chalkboard and whiteboard images', example: 'Classroom captures, worked problems' },
+      { icon: '✗', text: 'Mathematical notation and equations', example: 'Formulas, proofs, expressions' },
+      { icon: '✗', text: 'Scientific notation and symbols', example: 'Chemistry, physics, engineering' },
+      { icon: '✗', text: 'Complex graphs and data visualizations', example: 'Research figures, technical diagrams' },
+      { icon: '✗', text: 'Videos containing notation', example: 'Recorded lectures with equations' }
+    ],
+    conclusion: 'These are where screen readers and auto-generators struggle—or fail completely.',
+    placeholder: {
+      type: 'screenshots',
+      instruction: 'ADD SCREENSHOTS: ALLY failure examples',
+      suggestions: [
+        'ALLY accessibility score (red/orange) on a math equation image',
+        'ALLY\'s inadequate auto-generated text for handwritten notes',
+        'ALLY\'s description of a graph showing "image of a chart"'
+      ]
+    }
+  },
+  {
+    id: 10,
+    type: 'focus-with-examples',
+    title: 'Focus: Math & Scientific Notation',
+    subtitle: 'Why is this particularly challenging?',
+    challenges: [
+      {
+        problem: 'Visual complexity',
+        detail: 'Fractions, exponents, integrals, matrices—structure matters as much as symbols'
+      },
+      {
+        problem: 'Screen reader limitations',
+        detail: 'Reading "x squared" vs. displaying x² requires proper encoding (LaTeX, MathML)'
+      },
+      {
+        problem: 'Handwritten variability',
+        detail: 'Every instructor\'s notation looks different—OCR struggles'
+      },
+      {
+        problem: 'Context dependency',
+        detail: 'The same symbol means different things in different fields'
+      }
+    ],
+    placeholder: {
+      type: 'images',
+      instruction: 'ADD EXAMPLE IMAGES: Real math/science content',
+      suggestions: [
+        'Handwritten equation from a real lecture',
+        'Whiteboard capture with calculus notation',
+        'Chemistry notation (molecular formulas)',
+        'Physics diagram with vectors/equations'
+      ]
+    }
+  },
+  {
+    id: 11,
+    type: 'screen-reader-demo',
+    title: 'Hearing the Difference: Screen Reader Demo',
+    subtitle: 'What does inaccessible content sound like?',
+    demos: [
+      { label: 'Good', desc: 'Screen reader successfully reading MathML equation', status: 'working' },
+      { label: 'Bad', desc: 'Screen reader hitting image with no alt text', status: 'failing' },
+      { label: 'Inadequate', desc: 'Screen reader reading "image of mathematical formula"', status: 'poor' }
+    ],
+    placeholder: {
+      type: 'video',
+      instruction: 'ADD VIDEO: Screen reader demonstration (60-90 seconds)',
+      suggestions: [
+        'Option A: Embedded video with three short clips',
+        'Option B: Link to external demonstration',
+        'Option C: Live demo during presentation'
+      ]
+    }
+  },
+  {
+    id: 12,
+    type: 'gap-example',
+    title: 'The Accessibility Gap in STEM',
+    subtitle: 'What happens when tools fail:',
+    scenarios: [
+      {
+        situation: 'Professor uploads photo of whiteboard with derivation',
+        builtin: 'ALLY says: "Image of whiteboard with writing"',
+        needed: 'Full transcription of the mathematical steps in accessible format'
+      },
+      {
+        situation: 'Scanned PDF of textbook page with equations',
+        builtin: 'No text layer—completely inaccessible',
+        needed: 'OCR with proper math notation (LaTeX/MathML)'
+      },
+      {
+        situation: 'Graph showing function behavior',
+        builtin: '"A graph with lines"',
+        needed: 'Description of what the graph communicates mathematically'
+      }
+    ]
+  },
+
+  // ACT 3: THE SOLUTION
+  {
+    id: 13,
+    type: 'solution',
+    title: 'Enter AI-Enabled Tools',
+    subtitle: 'Multimodal AI can bridge the gap',
+    intro: 'Modern AI chatbots can see images AND understand mathematical context:',
+    tools: [
+      { name: 'Google Gemini', capability: 'Strong math OCR, LaTeX/MathML output, context understanding' },
+      { name: 'ChatGPT', capability: 'Image analysis, equation transcription, explanations' },
+      { name: 'Microsoft Copilot', capability: 'Integrated with Office, good for document workflows' }
+    ],
+    keypoint: 'These aren\'t replacements for ALLY—they\'re gap-fillers for the hard cases.',
+    formatNote: 'Output note: AI tools output LaTeX/MathML notation. MathJax (built into Canvas) renders these formats accessibly in the browser.',
+    pipelineNote: 'AI Tool → LaTeX/MathML → Canvas → MathJax renders → Screen readers can read'
+  },
+  {
+    id: 14,
+    type: 'framework',
+    title: 'The Prompt Framework',
+    heading: 'Getting good results requires good prompts:',
+    elements: [
+      { name: 'Role', desc: 'You are an accessibility specialist creating alt text for STEM education...' },
+      { name: 'Task', desc: 'Transcribe this handwritten equation into LaTeX and provide a verbal description...' },
+      { name: 'Context', desc: 'This is from a Calculus II lecture on integration by parts...' },
+      { name: 'Objective', desc: 'A screen reader user should understand both the notation AND the concept...' },
+      { name: 'Format', desc: 'Provide: 1) LaTeX code, 2) Plain English reading, 3) Conceptual summary' }
+    ]
+  },
+  {
+    id: 15,
+    type: 'workflow-example',
+    title: 'Prompt Framework in Action',
+    subtitle: 'A complete example from image to accessible content',
+    placeholder: {
+      type: 'workflow-demo',
+      instruction: 'ADD COMPLETE EXAMPLE: Show the full workflow',
+      example: {
+        inputImage: '[Photo of handwritten integral: ∫x²dx]',
+        promptUsed: 'You are an accessibility specialist for STEM education... This is from a Calculus I lecture on basic integration. Transcribe and provide accessible description.',
+        aiOutput: {
+          latex: '\\int x^2 \\, dx = \\frac{x^3}{3} + C',
+          screenReader: 'The integral of x squared dx equals x cubed over 3 plus C',
+          altText: 'Integration example: the antiderivative of x squared is x cubed divided by 3, plus constant'
+        },
+        canvasRender: '[Screenshot of how this looks in Canvas with MathJax]'
+      },
+      suggestions: [
+        'Use a real image from one of your courses',
+        'Show the actual AI conversation',
+        'Include screenshot of final Canvas page'
+      ]
+    }
+  },
+  {
+    id: 16,
+    type: 'prompt-example',
+    title: 'Example Prompt: General Images',
+    subtitle: 'For photographs, diagrams, icons, and standard visuals',
+    prompt: `You are an accessibility checker and alt text generator following WCAG 2.2 and the POUR principles (Perceivable, Operable, Understandable, Robust).
+
+Your task: evaluate the current alt text (if any) and suggest improvements based on the image, its function, and the surrounding course content.
+
+Step 1 – Analyze Context & Image
+• Type of image: photo, chart, diagram, icon, decorative, or functional?
+• Core information: what is the main message or data shown?
+• Surrounding content: is this already described in nearby text?
+• Complexity: short alt text or long description needed?
+
+Step 2 – POUR Evaluation
+• Perceivable: Is essential visual info described? If decorative, should alt="" be used?
+• Operable: If interactive, does the alt text describe the action or purpose, not appearance?
+• Understandable: Is it clear, accurate, concise (≤125 chars), or is a longer description required?
+• Robust: Is it in correct syntax and compatible with assistive tech?
+
+Step 3 – Output Format
+1. Current Alt Text Evaluation (Strengths / Weaknesses)
+2. POUR Compliance (✅/❌ for each principle with reason)
+3. Suggested Alt Text (short ≤125 chars, long description if needed, or alt="" if decorative)
+4. Rationale explaining how the new alt text improves accessibility
+
+AI Rules
+• Check page context first before writing alt text.
+• Avoid "Image of…" unless essential to meaning.
+• Keep language plain and clear.
+• Prioritize the most relevant interpretation for the learner.`
+  },
+  {
+    id: 17,
+    type: 'prompt-example',
+    title: 'Example Prompt: Math & Science Images',
+    subtitle: 'For equations, graphs, scientific notation, and handwritten content',
+    prompt: `You are an accessibility specialist for STEM education, following WCAG 2.2 and POUR principles. You have expertise in mathematical notation, scientific symbols, and LaTeX.
+
+Your task: convert mathematical/scientific images to accessible formats and generate appropriate descriptions.
+
+Step 1 – Analyze Content Type
+• Notation type: equation, formula, graph, diagram, handwritten, or mixed?
+• Mathematical domain: algebra, calculus, statistics, chemistry, physics, etc.?
+• Complexity level: single expression, multi-step derivation, or visual representation of data?
+• Surrounding context: what concept is being taught? What should the student learn?
+
+Step 2 – Transcription & Encoding
+• For equations/formulas: Provide LaTeX code that renders correctly in MathJax
+• For graphs: Describe the function, key features (intercepts, asymptotes, behavior), and what it demonstrates
+• For handwritten content: Transcribe all text and notation, preserving logical structure
+• For data visualizations: Summarize the data story and provide a text-based data table if appropriate
+
+Step 3 – Accessibility Outputs
+1. LaTeX Code (if applicable)
+   • Properly formatted for MathJax rendering
+   • Verified syntax
+
+2. Screen Reader Description
+   • How the equation should be read aloud
+   • Plain language, left-to-right, with proper mathematical vocabulary
+   • Example: "x equals the fraction negative b plus or minus the square root of b squared minus 4 a c, all over 2 a"
+
+3. Conceptual Alt Text (≤125 characters)
+   • What this image communicates in context
+   • Example: "Quadratic formula solving for x in terms of coefficients a, b, and c"
+
+4. Extended Description (if needed)
+   • For complex graphs/diagrams: describe what the visual shows and why it matters
+   • Include key data points, trends, or relationships
+
+Step 4 – Output in Markdown
+Format your response with clear sections. Math notation should use LaTeX syntax that works in both Markdown and HTML (Canvas).
+
+AI Rules
+• Always provide both the notation AND a verbal reading
+• For graphs, describe what it shows, not just what it looks like
+• Use proper mathematical vocabulary appropriate to the course level
+• Verify LaTeX syntax compiles correctly
+• Consider: what does the student need to understand from this image?`
+  },
+  {
+    id: 18,
+    type: 'setup',
+    title: 'Setting Up Your AI Workflow',
+    subtitle: 'Save time with reusable configurations',
+    methods: [
+      {
+        tool: 'Gemini Gems',
+        desc: 'Create a custom "Gem" with your accessibility prompt pre-loaded',
+        benefit: 'One click to start with the right context every time'
+      },
+      {
+        tool: 'ChatGPT Custom Instructions',
+        desc: 'Set persistent instructions for accessibility-focused responses',
+        benefit: 'Automatically applies your preferences to every conversation'
+      },
+      {
+        tool: 'Saved Prompts',
+        desc: 'Keep a document of tested prompts for different content types',
+        benefit: 'Copy-paste efficiency for common scenarios'
+      }
+    ]
+  },
+  {
+    id: 19,
+    type: 'demo',
+    title: 'Demo: Math Notation → Accessible Text',
+    description: 'Converting an equation image to accessible format',
+    steps: [
+      'Upload image of equation to Gemini/ChatGPT',
+      'Use prompt: "Transcribe this equation to LaTeX and provide a screen-reader-friendly description"',
+      'Review the LaTeX output for accuracy',
+      'Copy the verbal description for alt text',
+      'Convert Markdown to HTML if needed (LaTeX/MathML syntax stays the same)',
+      'Paste into Canvas—MathJax renders LaTeX/MathML notation accessibly'
+    ],
+    example: {
+      input: 'Photo of handwritten quadratic formula',
+      output: 'LaTeX: x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}\nAlt text: "The quadratic formula: x equals negative b plus or minus the square root of b squared minus 4ac, all divided by 2a"'
+    }
+  },
+  {
+    id: 20,
+    type: 'demo',
+    title: 'Demo: Handwritten Notes → Digital Text',
+    description: 'Converting lecture whiteboard captures',
+    steps: [
+      'Capture clear image of whiteboard/chalkboard',
+      'Upload to AI tool with context about the subject',
+      'Prompt: "Transcribe all text and notation. For equations, provide LaTeX. Preserve the logical structure."',
+      'Review and correct any OCR errors',
+      'Format as accessible document or Canvas page'
+    ],
+    tips: [
+      'Better lighting = better results',
+      'Include subject context in your prompt',
+      'Always verify mathematical accuracy',
+      'AI outputs Markdown—Canvas HTML editor accepts it, or convert as needed'
+    ]
+  },
+  {
+    id: 21,
+    type: 'workflow',
+    title: 'The Complete Accessible Workflow',
+    subtitle: 'Combining built-in tools with AI assistance',
+    steps: [
+      { num: 1, tool: 'ALLY', action: 'Identify content with low accessibility scores', color: 'blue' },
+      { num: 2, tool: 'Evaluate', action: 'Is this standard content or a "hard case"?', color: 'gray' },
+      { num: 3, tool: 'Built-in', action: 'For standard content: use ALLY/PowerPoint auto-generate', color: 'green' },
+      { num: 4, tool: 'AI Tool', action: 'For hard cases: bring to Gemini/ChatGPT with your prompt framework', color: 'purple' },
+      { num: 5, tool: 'Convert', action: 'AI outputs Markdown → convert to HTML for Canvas (math notation works in both)', color: 'orange' },
+      { num: 6, tool: 'Review', action: 'Verify accuracy—especially for math notation', color: 'orange' },
+      { num: 7, tool: 'Canvas', action: 'Add accessible content; MathJax renders LaTeX/MathML', color: 'blue' }
+    ],
+    warning: {
+      title: 'PDF Export Warning',
+      text: 'When exporting accessible Canvas content to PDF, accessibility features may be lost. The new PDF might not retain proper heading structure, alt text, or MathML accessibility. Keep content in Canvas when possible, or use dedicated accessible PDF creation tools.'
+    }
+  },
+
+  // ACT 4: PRACTICE & APPLICATION
+  {
+    id: 22,
+    type: 'activity',
+    title: 'Hands-On Activity',
+    subtitle: 'Try it with challenging content',
+    steps: [
+      { num: 1, text: 'Select a "hard case" image—handwritten notes, equations, or complex diagram' },
+      { num: 2, text: 'Identify the context: What course? What concept? What should a student learn?' },
+      { num: 3, text: 'Build your prompt using the framework (Role, Task, Context, Objective, Format)' },
+      { num: 4, text: 'Submit to an AI tool and evaluate the output' },
+      { num: 5, text: 'Refine your prompt if needed—iterate for better results' }
+    ],
+    timeboxed: '15 minutes'
+  },
+  {
+    id: 23,
+    type: 'discussion',
+    title: 'Debrief: Comparing Results',
+    questions: [
+      'How did AI-generated descriptions compare to ALLY auto-generate?',
+      'What types of content worked best? What still struggled?',
+      'How much prompt refinement was needed?',
+      'Would you trust the output without review? Why or why not?'
+    ],
+    insight: 'AI tools are powerful assistants, but human expertise remains essential for verification.'
+  },
+  {
+    id: 24,
+    type: 'student',
+    title: 'The Student Perspective',
+    subtitle: 'Empowering students to help themselves',
+    points: [
+      {
+        prompt: '"Describe this image from my textbook so I can understand it"',
+        use: 'Students with visual impairments can get on-demand descriptions'
+      },
+      {
+        prompt: '"Convert this equation image to text I can use with my screen reader"',
+        use: 'Immediate access to inaccessible content'
+      },
+      {
+        prompt: '"Explain what this graph is showing in plain language"',
+        use: 'Comprehension support beyond just accessibility'
+      }
+    ],
+    note: 'Teaching students these skills extends accessibility beyond what we can pre-create.'
+  },
+
+  // CLOSING
+  {
+    id: 25,
+    type: 'takeaways',
+    title: 'Key Takeaways',
+    items: [
+      { point: 'Built-in tools first', detail: 'ALLY and PowerPoint handle 80% of accessibility needs effectively' },
+      { point: 'AI for the gaps', detail: 'Handwritten content, math notation, and complex visuals need AI assistance' },
+      { point: 'Prompts matter', detail: 'Context-rich prompts with clear objectives produce better accessible content' },
+      { point: 'Always verify', detail: 'AI output requires human review—especially for STEM notation' },
+      { point: 'Mind the format', detail: 'AI outputs Markdown; Canvas uses HTML; MathJax renders LaTeX/MathML' },
+      { point: 'PDF caution', detail: 'Exporting to PDF may lose accessibility—keep in Canvas when possible' }
+    ]
+  },
+  {
+    id: 26,
+    type: 'resources',
+    title: 'Resources',
+    resources: [
+      { name: 'Making Learning Accessible for All: Meeting ADA Title II Standards', type: 'Policy' },
+      { name: 'Rutgers University Digital Accessibility Policy', type: 'Policy' },
+      { name: 'Workshop Prompt Templates', type: 'Toolkit' },
+      { name: 'MathJax Documentation for Canvas', type: 'Technical' }
+    ],
+    question: 'What other challenging content types should we address in future workshops?'
+  },
+  {
+    id: 27,
+    type: 'upcoming-workshops',
+    title: 'Continue Learning',
+    categories: [
+      {
+        heading: 'Accessibility Workshops',
+        org: 'Office of University Online Education Services',
+        placeholder: {
+          instruction: 'ADD: Current accessibility workshop schedule',
+          suggestions: [
+            'Workshop title, date, registration link',
+            'Workshop title, date, registration link'
+          ]
+        }
+      },
+      {
+        heading: 'GenAI Workshops',
+        org: 'Institute for Teaching, Innovation, and Inclusive Pedagogy',
+        sessions: [
+          { name: 'Beyond ChatGPT – Navigating Alternative Models', date: 'March 6 @ 11:00 am - 12:30 pm' },
+          { name: 'Teaching and GenAI Explorations: Images', date: 'February 20 @ 10:30 am - 11:30 am' }
+        ]
+      }
+    ]
+  },
+  {
+    id: 28,
+    type: 'closing',
+    title: 'Thank You!',
+    contacts: [
+      { name: 'Suparna Sinha', email: 'suparna@uoes.rutgers.edu' },
+      { name: 'Rick Anderson', email: 'rick.anderson@uoes.rutgers.edu' }
+    ],
+    org: 'Office of University Online Education Services'
+  }
+];
+
+// Slide Components
+const TitleSlide = ({ data }) => (
+  <div className="slide-content title-slide">
+    <div className="title-badge">RUTGERS UNIVERSITY</div>
+    <h1>{data.title}</h1>
+    <p className="subtitle">{data.subtitle}</p>
+    <div className="presenter-info">
+      <p className="presenter">{data.presenter}</p>
+      <p className="org">{data.org}</p>
+      <p className="date">{data.date}</p>
+    </div>
+  </div>
+);
+
+const AgendaSlide = ({ data }) => (
+  <div className="slide-content agenda-slide">
+    <h2>{data.title}</h2>
+    <p className="duration-badge">Duration: {data.duration}</p>
+    <div className="agenda-items">
+      {data.sections.map((section, i) => (
+        <div key={i} className="agenda-item">
+          <div className="agenda-num">{i + 1}</div>
+          <div className="agenda-content">
+            <h3>{section.name}</h3>
+            <p>{section.desc}</p>
+          </div>
+          <div className="agenda-time">{section.time}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const ObjectivesSlide = ({ data }) => (
+  <div className="slide-content">
+    <h2>{data.title}</h2>
+    <p className="objectives-subtitle">{data.subtitle}</p>
+    <ul className="objectives-list" role="list">
+      {data.items.map((item, i) => (
+        <li key={i}>
+          <span className="verb">{item.verb}</span>
+          <span>{item.text}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+const AlertSlide = ({ data }) => (
+  <div className="slide-content alert-slide">
+    <h2>{data.title}</h2>
+    <div className="alert-box" role="alert">
+      <h3>{data.headline}</h3>
+      <p className="deadline">{data.deadline}</p>
+    </div>
+    <p className="question">{data.question}</p>
+  </div>
+);
+
+const ContentTypesSlide = ({ data }) => (
+  <div className="slide-content">
+    <h2>{data.title}</h2>
+    <div className="content-types-grid">
+      {data.items.map((item, i) => (
+        <div key={i} className="content-type-card">
+          <h3>{item.type}</h3>
+          <p>{item.desc}</p>
+        </div>
+      ))}
+    </div>
+    {data.note && <p className="slide-note">{data.note}</p>}
+  </div>
+);
+
+const ContentChallengesSlide = ({ data }) => (
+  <div className="slide-content">
+    <h2>{data.title}</h2>
+    <p className="slide-intro">{data.intro}</p>
+    <div className="content-challenges-grid">
+      {data.items.map((item, i) => (
+        <div key={i} className="content-challenge-card">
+          <div className="challenge-header">
+            <h3>{item.type}</h3>
+            <p className="challenge-desc">{item.desc}</p>
+          </div>
+          <div className="challenge-edge">
+            <span className="edge-label">Edge cases:</span>
+            <span className="edge-text">{item.challenge}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+    {data.note && <p className="slide-note">{data.note}</p>}
+  </div>
+);
+
+const ToolkitSlide = ({ data }) => (
+  <div className="slide-content">
+    <h2>{data.title}</h2>
+    {data.intro && <p className="slide-intro">{data.intro}</p>}
+    <div className="toolkit-grid">
+      {data.columns.map((col, i) => (
+        <div key={i} className="toolkit-column">
+          <h3>{col.heading}</h3>
+          <ul role="list">
+            {col.items.map((item, j) => (
+              <li key={j}>{item}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const StandardsSlide = ({ data }) => (
+  <div className="slide-content standards-slide">
+    <h2>{data.title}</h2>
+    <p className="standards-subtitle">{data.subtitle}</p>
+    <div className="principles-grid">
+      {data.principles.map((p, i) => (
+        <div key={i} className="principle-card" role="article">
+          <span className="letter" aria-hidden="true">{p.letter}</span>
+          <h3>{p.name}</h3>
+          <p>{p.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const SuccessWithExamplesSlide = ({ data }) => (
+  <div className="slide-content success-slide">
+    <h2>{data.title}</h2>
+    <p className="slide-intro">{data.intro}</p>
+    <ul className="success-list" role="list">
+      {data.items.map((item, i) => (
+        <li key={i} className="success-item">
+          <span className="success-icon" aria-hidden="true">{item.icon}</span>
+          <span>{item.text}</span>
+        </li>
+      ))}
+    </ul>
+    <p className="slide-conclusion">{data.conclusion}</p>
+    {data.placeholder && (
+      <div className="placeholder-box">
+        <div className="placeholder-header">📷 {data.placeholder.instruction}</div>
+        <ul className="placeholder-suggestions">
+          {data.placeholder.suggestions.map((s, i) => (
+            <li key={i}>{s}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+);
+
+const ProblemWithExamplesSlide = ({ data }) => (
+  <div className="slide-content problem-slide">
+    <h2>{data.title}</h2>
+    <p className="slide-intro">{data.intro}</p>
+    <ul className="problem-list" role="list">
+      {data.items.map((item, i) => (
+        <li key={i} className="problem-item">
+          <span className="problem-icon" aria-hidden="true">{item.icon}</span>
+          <div className="problem-content">
+            <span className="problem-text">{item.text}</span>
+            <span className="problem-example">{item.example}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <p className="slide-conclusion warning">{data.conclusion}</p>
+    {data.placeholder && (
+      <div className="placeholder-box">
+        <div className="placeholder-header">📷 {data.placeholder.instruction}</div>
+        <ul className="placeholder-suggestions">
+          {data.placeholder.suggestions.map((s, i) => (
+            <li key={i}>{s}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+);
+
+const FocusWithExamplesSlide = ({ data }) => (
+  <div className="slide-content focus-slide">
+    <h2>{data.title}</h2>
+    <p className="focus-subtitle">{data.subtitle}</p>
+    <div className="challenges-list">
+      {data.challenges.map((c, i) => (
+        <div key={i} className="challenge-item">
+          <h3>{c.problem}</h3>
+          <p>{c.detail}</p>
+        </div>
+      ))}
+    </div>
+    {data.placeholder && (
+      <div className="placeholder-box">
+        <div className="placeholder-header">🖼️ {data.placeholder.instruction}</div>
+        <ul className="placeholder-suggestions">
+          {data.placeholder.suggestions.map((s, i) => (
+            <li key={i}>{s}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+);
+
+const ScreenReaderDemoSlide = ({ data }) => (
+  <div className="slide-content screen-reader-slide">
+    <h2>{data.title}</h2>
+    <p className="slide-subtitle">{data.subtitle}</p>
+    <div className="demo-cards">
+      {data.demos.map((demo, i) => (
+        <div key={i} className={`demo-card status-${demo.status}`}>
+          <span className="demo-label">{demo.label}</span>
+          <p>{demo.desc}</p>
+        </div>
+      ))}
+    </div>
+    {data.placeholder && (
+      <div className="placeholder-box video-placeholder">
+        <div className="placeholder-header">🎬 {data.placeholder.instruction}</div>
+        <ul className="placeholder-suggestions">
+          {data.placeholder.suggestions.map((s, i) => (
+            <li key={i}>{s}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+);
+
+const GapExampleSlide = ({ data }) => (
+  <div className="slide-content gap-slide">
+    <h2>{data.title}</h2>
+    <p className="slide-subtitle">{data.subtitle}</p>
+    <div className="scenarios">
+      {data.scenarios.map((s, i) => (
+        <div key={i} className="scenario-card">
+          <p className="scenario-situation">{s.situation}</p>
+          <div className="scenario-comparison">
+            <div className="scenario-builtin">
+              <span className="label">Built-in tools say:</span>
+              <span className="value">"{s.builtin}"</span>
+            </div>
+            <div className="scenario-needed">
+              <span className="label">What's actually needed:</span>
+              <span className="value">{s.needed}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const SolutionSlide = ({ data }) => (
+  <div className="slide-content solution-slide">
+    <h2>{data.title}</h2>
+    <p className="solution-subtitle">{data.subtitle}</p>
+    <p className="slide-intro">{data.intro}</p>
+    <div className="tools-grid">
+      {data.tools.map((tool, i) => (
+        <div key={i} className="tool-card">
+          <h3>{tool.name}</h3>
+          <p>{tool.capability}</p>
+        </div>
+      ))}
+    </div>
+    <p className="keypoint">{data.keypoint}</p>
+    {data.formatNote && <p className="format-note">{data.formatNote}</p>}
+    {data.pipelineNote && <p className="pipeline-note">Pipeline: {data.pipelineNote}</p>}
+  </div>
+);
+
+const FrameworkSlide = ({ data }) => (
+  <div className="slide-content">
+    <h2>{data.title}</h2>
+    <h3 className="framework-heading">{data.heading}</h3>
+    <div className="framework-elements">
+      {data.elements.map((el, i) => (
+        <div key={i} className="framework-item">
+          <span className="element-name">{el.name}</span>
+          <span className="element-desc">{el.desc}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const WorkflowExampleSlide = ({ data }) => (
+  <div className="slide-content workflow-example-slide">
+    <h2>{data.title}</h2>
+    <p className="slide-subtitle">{data.subtitle}</p>
+    {data.placeholder && (
+      <div className="placeholder-box large-placeholder">
+        <div className="placeholder-header">📋 {data.placeholder.instruction}</div>
+        
+        <div className="example-structure">
+          <div className="example-section">
+            <h4>Input Image</h4>
+            <p className="example-placeholder">{data.placeholder.example.inputImage}</p>
+          </div>
+          
+          <div className="example-section">
+            <h4>Prompt Used</h4>
+            <p className="example-placeholder">{data.placeholder.example.promptUsed}</p>
+          </div>
+          
+          <div className="example-section">
+            <h4>AI Output</h4>
+            <div className="ai-output-preview">
+              <p><strong>LaTeX:</strong> <code>{data.placeholder.example.aiOutput.latex}</code></p>
+              <p><strong>Screen Reader:</strong> "{data.placeholder.example.aiOutput.screenReader}"</p>
+              <p><strong>Alt Text:</strong> "{data.placeholder.example.aiOutput.altText}"</p>
+            </div>
+          </div>
+          
+          <div className="example-section">
+            <h4>Canvas Render</h4>
+            <p className="example-placeholder">{data.placeholder.example.canvasRender}</p>
+          </div>
+        </div>
+        
+        <ul className="placeholder-suggestions">
+          {data.placeholder.suggestions.map((s, i) => (
+            <li key={i}>{s}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+);
+
+const PromptExampleSlide = ({ data }) => (
+  <div className="slide-content prompt-example-slide">
+    <h2>{data.title}</h2>
+    <p className="prompt-subtitle">{data.subtitle}</p>
+    <div className="prompt-box">
+      <pre className="prompt-text">{data.prompt}</pre>
+    </div>
+    <p className="prompt-tip">💡 Save this as a Gemini Gem or ChatGPT Custom Instruction for reuse</p>
+  </div>
+);
+
+const SetupSlide = ({ data }) => (
+  <div className="slide-content">
+    <h2>{data.title}</h2>
+    <p className="slide-subtitle">{data.subtitle}</p>
+    <div className="methods-list">
+      {data.methods.map((m, i) => (
+        <div key={i} className="method-card">
+          <h3>{m.tool}</h3>
+          <p className="method-desc">{m.desc}</p>
+          <p className="method-benefit">→ {m.benefit}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const DemoSlide = ({ data }) => (
+  <div className="slide-content demo-slide">
+    <h2>{data.title}</h2>
+    <p className="demo-description">{data.description}</p>
+    <ol className="demo-steps" role="list">
+      {data.steps.map((step, i) => (
+        <li key={i}>{step}</li>
+      ))}
+    </ol>
+    {data.example && (
+      <div className="demo-example">
+        <div className="example-input">
+          <span className="example-label">Input:</span>
+          <span>{data.example.input}</span>
+        </div>
+        <div className="example-output">
+          <span className="example-label">Output:</span>
+          <pre>{data.example.output}</pre>
+        </div>
+      </div>
+    )}
+    {data.tips && (
+      <div className="demo-tips">
+        <h4>Tips:</h4>
+        <ul>
+          {data.tips.map((tip, i) => (
+            <li key={i}>{tip}</li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </div>
+);
+
+const WorkflowSlide = ({ data }) => (
+  <div className="slide-content">
+    <h2>{data.title}</h2>
+    <p className="slide-subtitle">{data.subtitle}</p>
+    <ol className="workflow-steps" role="list">
+      {data.steps.map((step, i) => (
+        <li key={i} className={`workflow-step color-${step.color}`}>
+          <span className="step-num">{step.num}</span>
+          <span className="step-tool">{step.tool}</span>
+          <span className="step-action">{step.action}</span>
+        </li>
+      ))}
+    </ol>
+    {data.warning && (
+      <div className="warning-box">
+        <h4>⚠️ {data.warning.title}</h4>
+        <p>{data.warning.text}</p>
+      </div>
+    )}
+  </div>
+);
+
+const ActivitySlide = ({ data }) => (
+  <div className="slide-content activity-slide">
+    <h2>{data.title}</h2>
+    <p className="activity-subtitle">{data.subtitle}</p>
+    <ol className="activity-steps" role="list">
+      {data.steps.map((step, i) => (
+        <li key={i}>
+          <span className="step-number">Step {step.num}</span>
+          <span>{step.text}</span>
+        </li>
+      ))}
+    </ol>
+    {data.timeboxed && <p className="timebox">⏱ Time: {data.timeboxed}</p>}
+  </div>
+);
+
+const DiscussionSlide = ({ data }) => (
+  <div className="slide-content discussion-slide">
+    <h2>{data.title}</h2>
+    <ul className="discussion-questions" role="list">
+      {data.questions.map((q, i) => (
+        <li key={i}>{q}</li>
+      ))}
+    </ul>
+    {data.insight && <p className="insight">{data.insight}</p>}
+  </div>
+);
+
+const StudentSlide = ({ data }) => (
+  <div className="slide-content student-slide">
+    <h2>{data.title}</h2>
+    <p className="student-subtitle">{data.subtitle}</p>
+    <div className="student-examples">
+      {data.points.map((point, i) => (
+        <div key={i} className="student-example">
+          <p className="student-prompt">"{point.prompt}"</p>
+          <p className="student-use">{point.use}</p>
+        </div>
+      ))}
+    </div>
+    {data.note && <p className="slide-note">{data.note}</p>}
+  </div>
+);
+
+const TakeawaysSlide = ({ data }) => (
+  <div className="slide-content takeaways-slide">
+    <h2>{data.title}</h2>
+    <div className="takeaways-list">
+      {data.items.map((item, i) => (
+        <div key={i} className="takeaway-item">
+          <h3>{item.point}</h3>
+          <p>{item.detail}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const ResourcesSlide = ({ data }) => (
+  <div className="slide-content">
+    <h2>{data.title}</h2>
+    <ul className="resources-list" role="list">
+      {data.resources.map((r, i) => (
+        <li key={i}>
+          <span className="resource-name">{r.name}</span>
+          <span className="resource-type">{r.type}</span>
+        </li>
+      ))}
+    </ul>
+    <p className="closing-question">{data.question}</p>
+  </div>
+);
+
+const UpcomingWorkshopsSlide = ({ data }) => (
+  <div className="slide-content upcoming-workshops-slide">
+    <h2>{data.title}</h2>
+    <div className="workshop-categories">
+      {data.categories.map((cat, i) => (
+        <div key={i} className="workshop-category">
+          <h3>{cat.heading}</h3>
+          <p className="org-name">{cat.org}</p>
+          {cat.sessions ? (
+            <div className="session-list">
+              {cat.sessions.map((session, j) => (
+                <div key={j} className="session-item">
+                  <span className="session-name">{session.name}</span>
+                  <span className="session-date">{session.date}</span>
+                </div>
+              ))}
+            </div>
+          ) : cat.placeholder ? (
+            <div className="placeholder-box small">
+              <div className="placeholder-header">📅 {cat.placeholder.instruction}</div>
+              <ul className="placeholder-suggestions">
+                {cat.placeholder.suggestions.map((s, j) => (
+                  <li key={j}>{s}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+const ClosingSlide = ({ data }) => (
+  <div className="slide-content closing-slide">
+    <h2>{data.title}</h2>
+    <div className="contacts">
+      {data.contacts.map((c, i) => (
+        <div key={i} className="contact">
+          <span className="contact-name">{c.name}</span>
+          <a href={`mailto:${c.email}`} className="contact-email">{c.email}</a>
+        </div>
+      ))}
+    </div>
+    <p className="closing-org">{data.org}</p>
+  </div>
+);
+
+const slideComponents = {
+  title: TitleSlide,
+  agenda: AgendaSlide,
+  objectives: ObjectivesSlide,
+  alert: AlertSlide,
+  'content-types': ContentTypesSlide,
+  'content-challenges': ContentChallengesSlide,
+  toolkit: ToolkitSlide,
+  standards: StandardsSlide,
+  'success-with-examples': SuccessWithExamplesSlide,
+  'problem-with-examples': ProblemWithExamplesSlide,
+  'focus-with-examples': FocusWithExamplesSlide,
+  'screen-reader-demo': ScreenReaderDemoSlide,
+  'gap-example': GapExampleSlide,
+  solution: SolutionSlide,
+  framework: FrameworkSlide,
+  'workflow-example': WorkflowExampleSlide,
+  'prompt-example': PromptExampleSlide,
+  setup: SetupSlide,
+  demo: DemoSlide,
+  workflow: WorkflowSlide,
+  activity: ActivitySlide,
+  discussion: DiscussionSlide,
+  student: StudentSlide,
+  takeaways: TakeawaysSlide,
+  resources: ResourcesSlide,
+  'upcoming-workshops': UpcomingWorkshopsSlide,
+  closing: ClosingSlide
+};
+
+export default function Presentation() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  const totalSlides = slides.length;
+  
+  const goToSlide = useCallback((index) => {
+    if (index >= 0 && index < totalSlides) {
+      setCurrentSlide(index);
+      setIsMenuOpen(false);
+    }
+  }, [totalSlides]);
+  
+  const nextSlide = useCallback(() => goToSlide(currentSlide + 1), [currentSlide, goToSlide]);
+  const prevSlide = useCallback(() => goToSlide(currentSlide - 1), [currentSlide, goToSlide]);
+  
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        goToSlide(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        goToSlide(totalSlides - 1);
+      } else if (e.key === 'Escape') {
+        setIsMenuOpen(false);
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [nextSlide, prevSlide, goToSlide, totalSlides]);
+  
+  const slide = slides[currentSlide];
+  const SlideComponent = slideComponents[slide.type];
+  
+  // Determine which "act" we're in for visual indicator
+  const getAct = (slideIndex) => {
+    if (slideIndex < 8) return { num: 1, name: 'The Challenge' };
+    if (slideIndex < 12) return { num: 2, name: 'The Gap' };
+    if (slideIndex < 21) return { num: 3, name: 'The Solution' };
+    if (slideIndex < 24) return { num: 4, name: 'Practice' };
+    return { num: 5, name: 'Closing' };
+  };
+  
+  const currentAct = getAct(currentSlide);
+  
+  return (
+    <div className="presentation-container">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap');
+        
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+        
+        :root {
+          --rutgers-scarlet: #CC0033;
+          --rutgers-dark: #5C0016;
+          --rutgers-light: #FFF0F3;
+          --text-primary: #1a1a2e;
+          --text-secondary: #4a4a6a;
+          --bg-primary: #FAFBFC;
+          --bg-card: #FFFFFF;
+          --accent-blue: #0066B8;
+          --accent-green: #2E7D32;
+          --accent-purple: #6B46C1;
+          --accent-orange: #D97706;
+          --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+          --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
+          --radius-sm: 8px;
+          --radius-md: 12px;
+          --radius-lg: 20px;
+          --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .presentation-container {
+          min-height: 100vh;
+          background: var(--bg-primary);
+          font-family: 'Source Sans 3', -apple-system, sans-serif;
+          color: var(--text-primary);
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .skip-link {
+          position: absolute;
+          top: -40px;
+          left: 0;
+          background: var(--rutgers-scarlet);
+          color: white;
+          padding: 8px 16px;
+          z-index: 100;
+          text-decoration: none;
+          font-weight: 600;
+        }
+        
+        .skip-link:focus { top: 0; }
+        
+        /* Header */
+        .header {
+          background: white;
+          border-bottom: 3px solid var(--rutgers-scarlet);
+          padding: 12px 24px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: sticky;
+          top: 0;
+          z-index: 50;
+        }
+        
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+        
+        .logo-mark {
+          background: var(--rutgers-scarlet);
+          color: white;
+          font-family: 'Source Serif 4', Georgia, serif;
+          font-size: 28px;
+          font-weight: 700;
+          width: 44px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 4px;
+        }
+        
+        .logo-text {
+          font-size: 14px;
+          line-height: 1.3;
+          color: var(--text-secondary);
+        }
+        
+        .logo-text strong {
+          display: block;
+          color: var(--text-primary);
+          font-weight: 600;
+        }
+        
+        .nav-controls {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+        }
+        
+        .act-indicator {
+          font-size: 13px;
+          color: var(--text-secondary);
+          background: #f0f0f5;
+          padding: 4px 12px;
+          border-radius: 20px;
+        }
+        
+        .slide-counter {
+          font-size: 14px;
+          color: var(--text-secondary);
+          font-variant-numeric: tabular-nums;
+          min-width: 60px;
+          text-align: center;
+        }
+        
+        .menu-button {
+          background: none;
+          border: 2px solid var(--text-secondary);
+          padding: 8px 16px;
+          border-radius: var(--radius-sm);
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--text-secondary);
+          cursor: pointer;
+          transition: var(--transition);
+        }
+        
+        .menu-button:hover, .menu-button:focus {
+          border-color: var(--rutgers-scarlet);
+          color: var(--rutgers-scarlet);
+          outline: none;
+        }
+        
+        /* Main */
+        main {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          padding: 24px;
+          max-width: 1100px;
+          width: 100%;
+          margin: 0 auto;
+        }
+        
+        .slide {
+          flex: 1;
+          background: var(--bg-card);
+          border-radius: var(--radius-lg);
+          box-shadow: var(--shadow-md);
+          padding: 40px;
+          min-height: 520px;
+          display: flex;
+          flex-direction: column;
+          animation: slideIn 0.4s ease-out;
+          overflow-y: auto;
+        }
+        
+        @keyframes slideIn {
+          from { opacity: 0; transform: translateX(20px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide-content { flex: 1; }
+        
+        .slide h2 {
+          font-family: 'Source Serif 4', Georgia, serif;
+          font-size: 2rem;
+          font-weight: 600;
+          color: var(--text-primary);
+          margin-bottom: 16px;
+          line-height: 1.2;
+        }
+        
+        .slide h3 {
+          font-size: 1.1rem;
+          font-weight: 600;
+          color: var(--rutgers-scarlet);
+          margin-bottom: 8px;
+        }
+        
+        .slide-intro, .slide-subtitle {
+          font-size: 1.05rem;
+          color: var(--text-secondary);
+          margin-bottom: 16px;
+        }
+        
+        .slide-note {
+          margin-top: 20px;
+          padding: 12px 16px;
+          background: var(--rutgers-light);
+          border-radius: var(--radius-sm);
+          font-size: 0.9rem;
+          color: var(--rutgers-dark);
+          border-left: 4px solid var(--rutgers-scarlet);
+        }
+        
+        .slide-conclusion {
+          margin-top: 20px;
+          font-size: 1rem;
+          font-weight: 600;
+          color: var(--accent-green);
+          text-align: center;
+          padding: 14px;
+          background: #E8F5E9;
+          border-radius: var(--radius-sm);
+        }
+        
+        .slide-conclusion.warning {
+          color: var(--rutgers-dark);
+          background: var(--rutgers-light);
+        }
+        
+        /* Placeholder Boxes */
+        .placeholder-box {
+          margin-top: 20px;
+          padding: 16px;
+          background: #FFF3E0;
+          border: 2px dashed var(--accent-orange);
+          border-radius: var(--radius-md);
+        }
+        
+        .placeholder-box.large-placeholder {
+          background: #F3E5F5;
+          border-color: var(--accent-purple);
+        }
+        
+        .placeholder-box.video-placeholder {
+          background: #E3F2FD;
+          border-color: var(--accent-blue);
+        }
+        
+        .placeholder-box.small {
+          padding: 12px;
+          margin-top: 12px;
+        }
+        
+        .placeholder-header {
+          font-weight: 700;
+          color: var(--accent-orange);
+          margin-bottom: 10px;
+          font-size: 0.95rem;
+        }
+        
+        .large-placeholder .placeholder-header {
+          color: var(--accent-purple);
+        }
+        
+        .video-placeholder .placeholder-header {
+          color: var(--accent-blue);
+        }
+        
+        .placeholder-suggestions {
+          list-style: disc;
+          margin-left: 20px;
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+        }
+        
+        .placeholder-suggestions li {
+          padding: 3px 0;
+        }
+        
+        /* Title Slide */
+        .title-slide {
+          text-align: center;
+          justify-content: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        .title-badge {
+          background: var(--rutgers-scarlet);
+          color: white;
+          padding: 6px 16px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          margin-bottom: 20px;
+        }
+        
+        .title-slide h1 {
+          font-family: 'Source Serif 4', Georgia, serif;
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: var(--text-primary);
+          margin-bottom: 14px;
+          max-width: 800px;
+        }
+        
+        .title-slide .subtitle {
+          font-size: 1.15rem;
+          color: var(--text-secondary);
+          max-width: 650px;
+          margin-bottom: 36px;
+          line-height: 1.5;
+        }
+        
+        .presenter-info {
+          margin-top: auto;
+          padding-top: 28px;
+          border-top: 1px solid #eee;
+        }
+        
+        .presenter { font-weight: 600; font-size: 1.05rem; margin-bottom: 4px; }
+        .org, .date { color: var(--text-secondary); font-size: 0.9rem; }
+        
+        /* Agenda */
+        .agenda-slide h2 { margin-bottom: 8px; }
+        
+        .duration-badge {
+          display: inline-block;
+          background: var(--accent-blue);
+          color: white;
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 0.85rem;
+          font-weight: 600;
+          margin-bottom: 20px;
+        }
+        
+        .agenda-items {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        
+        .agenda-item {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 14px;
+          background: #f8f9fa;
+          border-radius: var(--radius-sm);
+        }
+        
+        .agenda-num {
+          width: 32px;
+          height: 32px;
+          background: var(--rutgers-scarlet);
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          font-size: 0.9rem;
+          flex-shrink: 0;
+        }
+        
+        .agenda-content {
+          flex: 1;
+        }
+        
+        .agenda-content h3 {
+          color: var(--text-primary);
+          margin-bottom: 2px;
+          font-size: 1rem;
+        }
+        
+        .agenda-content p {
+          font-size: 0.9rem;
+          color: var(--text-secondary);
+        }
+        
+        .agenda-time {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          background: white;
+          padding: 4px 10px;
+          border-radius: 4px;
+          font-weight: 500;
+        }
+        
+        /* Objectives */
+        .objectives-subtitle {
+          font-size: 1.1rem;
+          color: var(--text-secondary);
+          margin-bottom: 16px;
+        }
+        
+        .objectives-list {
+          list-style: none;
+        }
+        
+        .objectives-list li {
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          padding: 12px 0;
+          border-bottom: 1px solid #f0f0f5;
+          font-size: 1rem;
+        }
+        
+        .verb {
+          background: var(--rutgers-scarlet);
+          color: white;
+          padding: 3px 10px;
+          border-radius: 4px;
+          font-weight: 700;
+          font-size: 0.8rem;
+          flex-shrink: 0;
+        }
+        
+        /* Alert */
+        .alert-box {
+          background: linear-gradient(135deg, var(--rutgers-scarlet) 0%, var(--rutgers-dark) 100%);
+          color: white;
+          padding: 28px;
+          border-radius: var(--radius-md);
+          text-align: center;
+          margin: 20px 0;
+        }
+        
+        .alert-box h3 { color: white; font-size: 1.3rem; margin-bottom: 10px; }
+        .deadline { font-size: 1.2rem; font-weight: 700; }
+        .question {
+          font-size: 1.1rem;
+          font-style: italic;
+          color: var(--text-secondary);
+          text-align: center;
+          margin-top: 20px;
+        }
+        
+        /* Content Types */
+        .content-types-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+          gap: 12px;
+        }
+        
+        .content-type-card {
+          background: #f8f9fa;
+          padding: 16px;
+          border-radius: var(--radius-sm);
+          border-left: 4px solid var(--accent-blue);
+        }
+        
+        .content-type-card h3 { color: var(--text-primary); margin-bottom: 4px; font-size: 1rem; }
+        .content-type-card p { font-size: 0.85rem; color: var(--text-secondary); }
+        
+        /* Content Challenges */
+        .content-challenges-grid {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        
+        .content-challenge-card {
+          background: #f8f9fa;
+          padding: 14px 16px;
+          border-radius: var(--radius-sm);
+          border-left: 4px solid var(--accent-blue);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 16px;
+        }
+        
+        .challenge-header {
+          flex: 1;
+        }
+        
+        .challenge-header h3 {
+          color: var(--text-primary);
+          margin-bottom: 2px;
+          font-size: 1rem;
+        }
+        
+        .challenge-desc {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+        }
+        
+        .challenge-edge {
+          background: #FFF8E1;
+          padding: 8px 12px;
+          border-radius: var(--radius-sm);
+          font-size: 0.8rem;
+          max-width: 280px;
+        }
+        
+        .edge-label {
+          color: var(--accent-orange);
+          font-weight: 600;
+          display: block;
+          font-size: 0.7rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: 2px;
+        }
+        
+        .edge-text {
+          color: var(--text-secondary);
+        }
+        
+        /* Toolkit */
+        .toolkit-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+          gap: 20px;
+        }
+        
+        .toolkit-column {
+          background: #f8f9fa;
+          padding: 20px;
+          border-radius: var(--radius-md);
+        }
+        
+        .toolkit-column h3 {
+          margin-bottom: 14px;
+          padding-bottom: 10px;
+          border-bottom: 2px solid var(--rutgers-scarlet);
+        }
+        
+        .toolkit-column ul { list-style: none; }
+        .toolkit-column li {
+          padding: 8px 0;
+          padding-left: 22px;
+          position: relative;
+          font-size: 0.95rem;
+        }
+        
+        .toolkit-column li::before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: var(--accent-green);
+          font-weight: bold;
+        }
+        
+        /* Standards */
+        .standards-subtitle {
+          font-size: 1.15rem;
+          color: var(--text-secondary);
+          margin-bottom: 20px;
+        }
+        
+        .principles-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 14px;
+        }
+        
+        .principle-card {
+          background: #f8f9fa;
+          padding: 16px;
+          border-radius: var(--radius-md);
+          border-left: 4px solid var(--rutgers-scarlet);
+        }
+        
+        .letter {
+          font-family: 'Source Serif 4', Georgia, serif;
+          font-size: 2.2rem;
+          font-weight: 700;
+          color: var(--rutgers-scarlet);
+          line-height: 1;
+        }
+        
+        .principle-card h3 { margin: 6px 0; color: var(--text-primary); font-size: 1rem; }
+        .principle-card p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4; }
+        
+        /* Success & Problem Lists */
+        .success-list, .problem-list { list-style: none; }
+        
+        .success-item, .problem-item {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          padding: 10px 0;
+          border-bottom: 1px solid #f0f0f5;
+          font-size: 0.95rem;
+        }
+        
+        .success-icon { color: var(--accent-green); font-weight: bold; }
+        .problem-icon { color: var(--rutgers-scarlet); font-weight: bold; }
+        
+        .problem-content { display: flex; flex-direction: column; gap: 2px; }
+        .problem-text { font-weight: 500; }
+        .problem-example { font-size: 0.85rem; color: var(--text-secondary); font-style: italic; }
+        
+        /* Focus */
+        .focus-subtitle {
+          font-size: 1.1rem;
+          color: var(--text-secondary);
+          margin-bottom: 16px;
+        }
+        
+        .challenges-list {
+          display: grid;
+          gap: 12px;
+        }
+        
+        .challenge-item {
+          background: #FFF8E1;
+          padding: 14px;
+          border-radius: var(--radius-sm);
+          border-left: 4px solid var(--accent-orange);
+        }
+        
+        .challenge-item h3 { color: var(--accent-orange); margin-bottom: 4px; font-size: 0.95rem; }
+        .challenge-item p { color: var(--text-secondary); font-size: 0.9rem; }
+        
+        /* Screen Reader Demo */
+        .screen-reader-slide .slide-subtitle {
+          margin-bottom: 20px;
+        }
+        
+        .demo-cards {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 14px;
+          margin-bottom: 20px;
+        }
+        
+        .demo-card {
+          padding: 16px;
+          border-radius: var(--radius-md);
+          text-align: center;
+        }
+        
+        .demo-card.status-working {
+          background: #E8F5E9;
+          border: 2px solid var(--accent-green);
+        }
+        
+        .demo-card.status-failing {
+          background: var(--rutgers-light);
+          border: 2px solid var(--rutgers-scarlet);
+        }
+        
+        .demo-card.status-poor {
+          background: #FFF8E1;
+          border: 2px solid var(--accent-orange);
+        }
+        
+        .demo-label {
+          font-weight: 700;
+          font-size: 1.1rem;
+          display: block;
+          margin-bottom: 6px;
+        }
+        
+        .status-working .demo-label { color: var(--accent-green); }
+        .status-failing .demo-label { color: var(--rutgers-scarlet); }
+        .status-poor .demo-label { color: var(--accent-orange); }
+        
+        .demo-card p {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+        }
+        
+        /* Gap Example */
+        .scenarios { display: flex; flex-direction: column; gap: 14px; }
+        
+        .scenario-card {
+          background: #f8f9fa;
+          padding: 16px;
+          border-radius: var(--radius-md);
+        }
+        
+        .scenario-situation {
+          font-weight: 600;
+          margin-bottom: 12px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid #e0e0e0;
+          font-size: 0.95rem;
+        }
+        
+        .scenario-comparison {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 12px;
+        }
+        
+        .scenario-builtin, .scenario-needed {
+          padding: 10px;
+          border-radius: var(--radius-sm);
+          font-size: 0.9rem;
+        }
+        
+        .scenario-builtin { background: var(--rutgers-light); }
+        .scenario-needed { background: #E8F5E9; }
+        
+        .scenario-comparison .label {
+          display: block;
+          font-size: 0.75rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          margin-bottom: 4px;
+          color: var(--text-secondary);
+        }
+        
+        /* Solution */
+        .solution-subtitle {
+          font-size: 1.15rem;
+          color: var(--accent-purple);
+          font-weight: 600;
+          margin-bottom: 6px;
+        }
+        
+        .tools-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 12px;
+          margin: 16px 0;
+        }
+        
+        .tool-card {
+          background: linear-gradient(135deg, #4A148C 0%, #7B1FA2 100%);
+          color: white;
+          padding: 16px;
+          border-radius: var(--radius-md);
+        }
+        
+        .tool-card h3 { color: white; margin-bottom: 6px; font-size: 1rem; }
+        .tool-card p { font-size: 0.85rem; opacity: 0.9; }
+        
+        .keypoint {
+          text-align: center;
+          font-weight: 600;
+          color: var(--text-primary);
+          padding: 12px;
+          background: #EDE7F6;
+          border-radius: var(--radius-sm);
+          margin-top: 12px;
+          font-size: 0.95rem;
+        }
+        
+        .format-note {
+          text-align: center;
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          margin-top: 10px;
+          padding: 8px 14px;
+          background: #E3F2FD;
+          border-radius: var(--radius-sm);
+          border-left: 3px solid var(--accent-blue);
+        }
+        
+        .pipeline-note {
+          text-align: center;
+          font-size: 0.8rem;
+          color: var(--accent-purple);
+          margin-top: 8px;
+          font-family: 'Monaco', monospace;
+        }
+        
+        /* Framework */
+        .framework-heading {
+          font-size: 1.05rem;
+          color: var(--text-secondary);
+          font-weight: 500;
+          margin-bottom: 16px;
+        }
+        
+        .framework-elements { display: flex; flex-direction: column; gap: 10px; }
+        
+        .framework-item {
+          display: flex;
+          gap: 14px;
+          padding: 12px 14px;
+          background: #f8f9fa;
+          border-radius: var(--radius-sm);
+          align-items: baseline;
+          font-size: 0.95rem;
+        }
+        
+        .element-name {
+          font-weight: 700;
+          color: var(--rutgers-scarlet);
+          min-width: 80px;
+        }
+        
+        .element-desc {
+          color: var(--text-secondary);
+          font-size: 0.9rem;
+          font-style: italic;
+        }
+        
+        /* Workflow Example */
+        .example-structure {
+          display: grid;
+          gap: 12px;
+          margin: 16px 0;
+        }
+        
+        .example-section {
+          background: white;
+          padding: 12px;
+          border-radius: var(--radius-sm);
+        }
+        
+        .example-section h4 {
+          font-size: 0.85rem;
+          color: var(--accent-purple);
+          margin-bottom: 6px;
+        }
+        
+        .example-placeholder {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          font-style: italic;
+        }
+        
+        .ai-output-preview {
+          font-size: 0.85rem;
+        }
+        
+        .ai-output-preview code {
+          background: #f0f0f5;
+          padding: 2px 6px;
+          border-radius: 3px;
+          font-size: 0.8rem;
+        }
+        
+        /* Prompt Example */
+        .prompt-example-slide h2 {
+          font-size: 1.7rem;
+          margin-bottom: 6px;
+        }
+        
+        .prompt-subtitle {
+          color: var(--text-secondary);
+          margin-bottom: 12px;
+          font-size: 1rem;
+        }
+        
+        .prompt-box {
+          background: #1E1E1E;
+          border-radius: var(--radius-md);
+          padding: 16px;
+          max-height: 340px;
+          overflow-y: auto;
+        }
+        
+        .prompt-text {
+          color: #D4D4D4;
+          font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+          font-size: 0.7rem;
+          line-height: 1.45;
+          white-space: pre-wrap;
+          margin: 0;
+        }
+        
+        .prompt-tip {
+          margin-top: 12px;
+          text-align: center;
+          color: var(--accent-blue);
+          font-size: 0.85rem;
+          font-weight: 500;
+        }
+        
+        /* Setup */
+        .methods-list { display: flex; flex-direction: column; gap: 12px; }
+        
+        .method-card {
+          background: #f8f9fa;
+          padding: 16px;
+          border-radius: var(--radius-md);
+          border-left: 4px solid var(--accent-blue);
+        }
+        
+        .method-card h3 { color: var(--accent-blue); margin-bottom: 6px; font-size: 1rem; }
+        .method-desc { color: var(--text-secondary); margin-bottom: 6px; font-size: 0.9rem; }
+        .method-benefit { color: var(--accent-green); font-weight: 500; font-size: 0.9rem; }
+        
+        /* Demo */
+        .demo-description {
+          font-size: 1rem;
+          color: var(--text-secondary);
+          margin-bottom: 16px;
+        }
+        
+        .demo-steps {
+          list-style: none;
+          counter-reset: demo;
+        }
+        
+        .demo-steps li {
+          padding: 10px 14px 10px 44px;
+          margin-bottom: 8px;
+          background: #f8f9fa;
+          border-radius: var(--radius-sm);
+          position: relative;
+          counter-increment: demo;
+          font-size: 0.9rem;
+        }
+        
+        .demo-steps li::before {
+          content: counter(demo);
+          position: absolute;
+          left: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 22px;
+          height: 22px;
+          background: var(--accent-blue);
+          color: white;
+          border-radius: 50%;
+          font-size: 11px;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .demo-example {
+          margin-top: 16px;
+          background: #263238;
+          color: #ECEFF1;
+          padding: 14px;
+          border-radius: var(--radius-md);
+          font-family: 'Monaco', 'Menlo', monospace;
+          font-size: 0.8rem;
+        }
+        
+        .example-label {
+          color: #80CBC4;
+          font-weight: 600;
+          display: block;
+          margin-bottom: 4px;
+        }
+        
+        .example-output pre {
+          white-space: pre-wrap;
+          margin-top: 10px;
+          padding-top: 10px;
+          border-top: 1px solid #455A64;
+        }
+        
+        .demo-tips {
+          margin-top: 16px;
+          padding: 12px;
+          background: #FFF8E1;
+          border-radius: var(--radius-sm);
+        }
+        
+        .demo-tips h4 { color: var(--accent-orange); margin-bottom: 8px; font-size: 0.9rem; }
+        .demo-tips ul { list-style: disc; margin-left: 18px; }
+        .demo-tips li { padding: 3px 0; color: var(--text-secondary); font-size: 0.85rem; }
+        
+        /* Workflow */
+        .workflow-steps {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+        
+        .workflow-step {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px;
+          background: #f8f9fa;
+          border-radius: var(--radius-sm);
+          border-left: 4px solid;
+          font-size: 0.9rem;
+        }
+        
+        .workflow-step.color-blue { border-color: var(--accent-blue); }
+        .workflow-step.color-gray { border-color: #9E9E9E; }
+        .workflow-step.color-green { border-color: var(--accent-green); }
+        .workflow-step.color-purple { border-color: var(--accent-purple); }
+        .workflow-step.color-orange { border-color: var(--accent-orange); }
+        
+        .step-num {
+          width: 24px;
+          height: 24px;
+          background: var(--text-primary);
+          color: white;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 700;
+          font-size: 0.75rem;
+          flex-shrink: 0;
+        }
+        
+        .step-tool {
+          background: var(--rutgers-scarlet);
+          color: white;
+          padding: 3px 10px;
+          border-radius: 4px;
+          font-weight: 600;
+          font-size: 0.75rem;
+          min-width: 60px;
+          text-align: center;
+        }
+        
+        .step-action { flex: 1; }
+        
+        .warning-box {
+          margin-top: 16px;
+          padding: 14px;
+          background: #FFF8E1;
+          border: 1px solid var(--accent-orange);
+          border-radius: var(--radius-sm);
+        }
+        
+        .warning-box h4 {
+          color: var(--accent-orange);
+          margin-bottom: 6px;
+          font-size: 0.95rem;
+        }
+        
+        .warning-box p {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+        }
+        
+        /* Activity */
+        .activity-subtitle {
+          font-size: 1.05rem;
+          color: var(--text-secondary);
+          margin-bottom: 16px;
+        }
+        
+        .activity-steps { list-style: none; }
+        
+        .activity-steps li {
+          display: flex;
+          align-items: flex-start;
+          gap: 14px;
+          padding: 14px;
+          margin-bottom: 10px;
+          background: linear-gradient(90deg, var(--rutgers-light) 0%, white 100%);
+          border-radius: var(--radius-sm);
+          border-left: 4px solid var(--rutgers-scarlet);
+          font-size: 0.95rem;
+        }
+        
+        .step-number {
+          font-weight: 700;
+          color: var(--rutgers-scarlet);
+          font-size: 0.8rem;
+          white-space: nowrap;
+        }
+        
+        .timebox {
+          margin-top: 20px;
+          text-align: center;
+          font-weight: 600;
+          color: var(--accent-blue);
+          font-size: 1rem;
+        }
+        
+        /* Discussion */
+        .discussion-questions { list-style: none; }
+        
+        .discussion-questions li {
+          padding: 14px;
+          margin-bottom: 10px;
+          background: #f8f9fa;
+          border-radius: var(--radius-sm);
+          font-size: 0.95rem;
+          border-left: 4px solid var(--accent-blue);
+        }
+        
+        .insight {
+          margin-top: 20px;
+          padding: 14px;
+          background: #EDE7F6;
+          border-radius: var(--radius-sm);
+          text-align: center;
+          font-weight: 500;
+          color: var(--accent-purple);
+          font-size: 0.95rem;
+        }
+        
+        /* Student */
+        .student-subtitle {
+          font-size: 1.05rem;
+          color: var(--text-secondary);
+          margin-bottom: 16px;
+        }
+        
+        .student-examples {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        
+        .student-example {
+          background: #f8f9fa;
+          padding: 14px;
+          border-radius: var(--radius-md);
+        }
+        
+        .student-prompt {
+          font-family: 'Monaco', 'Menlo', monospace;
+          font-size: 0.9rem;
+          color: var(--accent-purple);
+          margin-bottom: 8px;
+          padding: 8px;
+          background: #EDE7F6;
+          border-radius: var(--radius-sm);
+        }
+        
+        .student-use {
+          color: var(--text-secondary);
+          font-size: 0.9rem;
+        }
+        
+        /* Takeaways */
+        .takeaways-list {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 12px;
+        }
+        
+        .takeaway-item {
+          padding: 14px;
+          background: #f8f9fa;
+          border-radius: var(--radius-sm);
+          border-left: 4px solid var(--accent-green);
+        }
+        
+        .takeaway-item h3 { color: var(--text-primary); font-size: 0.95rem; margin-bottom: 4px; }
+        .takeaway-item p { color: var(--text-secondary); font-size: 0.85rem; }
+        
+        /* Resources */
+        .resources-list { list-style: none; }
+        
+        .resources-list li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px;
+          margin-bottom: 8px;
+          background: #f8f9fa;
+          border-radius: var(--radius-sm);
+        }
+        
+        .resource-name { font-weight: 500; font-size: 0.95rem; }
+        .resource-type {
+          font-size: 0.75rem;
+          color: var(--text-secondary);
+          background: white;
+          padding: 3px 8px;
+          border-radius: 4px;
+        }
+        
+        .closing-question {
+          margin-top: 20px;
+          text-align: center;
+          font-style: italic;
+          color: var(--text-secondary);
+        }
+        
+        /* Upcoming Workshops */
+        .workshop-categories {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 20px;
+        }
+        
+        .workshop-category {
+          background: #f8f9fa;
+          padding: 20px;
+          border-radius: var(--radius-md);
+        }
+        
+        .workshop-category h3 {
+          color: var(--text-primary);
+          margin-bottom: 4px;
+          font-size: 1.1rem;
+        }
+        
+        .workshop-category .org-name {
+          font-size: 0.85rem;
+          color: var(--text-secondary);
+          margin-bottom: 14px;
+        }
+        
+        .session-list {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        
+        .session-item {
+          background: linear-gradient(135deg, #1a4d6e 0%, #2d6e8c 100%);
+          color: white;
+          padding: 12px;
+          border-radius: var(--radius-sm);
+        }
+        
+        .session-name {
+          display: block;
+          font-weight: 600;
+          font-size: 0.9rem;
+          margin-bottom: 4px;
+        }
+        
+        .session-date {
+          font-size: 0.8rem;
+          opacity: 0.9;
+        }
+        
+        /* Closing */
+        .closing-slide {
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        
+        .contacts {
+          display: flex;
+          justify-content: center;
+          gap: 40px;
+          margin: 28px 0;
+        }
+        
+        .contact { display: flex; flex-direction: column; gap: 4px; }
+        .contact-name { font-weight: 600; font-size: 1.1rem; }
+        .contact-email { color: var(--accent-blue); text-decoration: none; }
+        .contact-email:hover { text-decoration: underline; }
+        .closing-org { color: var(--text-secondary); margin-top: 12px; }
+        
+        /* Navigation */
+        .navigation {
+          display: flex;
+          justify-content: center;
+          gap: 14px;
+          padding: 20px;
+        }
+        
+        .nav-btn {
+          background: white;
+          border: 2px solid #ddd;
+          padding: 10px 20px;
+          border-radius: var(--radius-sm);
+          font-size: 0.95rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: var(--transition);
+        }
+        
+        .nav-btn:hover:not(:disabled) {
+          border-color: var(--rutgers-scarlet);
+          color: var(--rutgers-scarlet);
+        }
+        
+        .nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        
+        /* Progress */
+        .progress-bar {
+          height: 4px;
+          background: #eee;
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+        
+        .progress-fill {
+          height: 100%;
+          background: var(--rutgers-scarlet);
+          transition: width 0.3s ease;
+        }
+        
+        /* Menu */
+        .slide-menu-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,0.5);
+          z-index: 100;
+          display: flex;
+          justify-content: flex-end;
+        }
+        
+        .slide-menu {
+          background: white;
+          width: 380px;
+          max-width: 90vw;
+          height: 100%;
+          overflow-y: auto;
+          padding: 20px;
+          animation: slideInRight 0.3s ease;
+        }
+        
+        @keyframes slideInRight {
+          from { transform: translateX(100%); }
+          to { transform: translateX(0); }
+        }
+        
+        .slide-menu h2 {
+          font-size: 1.2rem;
+          margin-bottom: 14px;
+          padding-bottom: 10px;
+          border-bottom: 2px solid var(--rutgers-scarlet);
+        }
+        
+        .slide-menu-section { margin-bottom: 16px; }
+        
+        .section-label {
+          font-size: 0.7rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: var(--text-secondary);
+          margin-bottom: 6px;
+          padding-left: 8px;
+        }
+        
+        .slide-menu-list { display: flex; flex-direction: column; gap: 2px; }
+        
+        .slide-menu-item {
+          background: none;
+          border: none;
+          padding: 8px 10px;
+          text-align: left;
+          cursor: pointer;
+          border-radius: var(--radius-sm);
+          font-size: 0.85rem;
+          transition: var(--transition);
+          display: flex;
+          gap: 8px;
+        }
+        
+        .slide-menu-item:hover { background: #f0f0f5; }
+        .slide-menu-item.active {
+          background: var(--rutgers-light);
+          color: var(--rutgers-scarlet);
+          font-weight: 600;
+        }
+        
+        .slide-num { min-width: 18px; color: var(--text-secondary); font-size: 0.8rem; }
+        
+        /* Keyboard hints */
+        .keyboard-hints {
+          position: fixed;
+          bottom: 14px;
+          right: 14px;
+          background: white;
+          padding: 8px 12px;
+          border-radius: var(--radius-sm);
+          box-shadow: var(--shadow-sm);
+          font-size: 0.75rem;
+          color: var(--text-secondary);
+          display: flex;
+          gap: 12px;
+        }
+        
+        .keyboard-hints kbd {
+          background: #f0f0f5;
+          padding: 2px 5px;
+          border-radius: 3px;
+          font-family: inherit;
+        }
+        
+        *:focus-visible {
+          outline: 3px solid var(--rutgers-scarlet);
+          outline-offset: 2px;
+        }
+        
+        @media (max-width: 768px) {
+          main { padding: 12px; }
+          .slide { padding: 20px; }
+          .slide h2 { font-size: 1.5rem; }
+          .title-slide h1 { font-size: 1.8rem; }
+          .principles-grid, .toolkit-grid, .takeaways-list { grid-template-columns: 1fr; }
+          .scenario-comparison { grid-template-columns: 1fr; }
+          .contacts { flex-direction: column; gap: 16px; }
+          .keyboard-hints { display: none; }
+          .act-indicator { display: none; }
+          .workshop-categories { grid-template-columns: 1fr; }
+        }
+      `}</style>
+      
+      <a href="#main-content" className="skip-link">Skip to content</a>
+      
+      <header className="header" role="banner">
+        <div className="logo">
+          <div className="logo-mark" aria-hidden="true">R</div>
+          <div className="logo-text">
+            <strong>RUTGERS UNIVERSITY</strong>
+            Office of University Online Education Services
+          </div>
+        </div>
+        <div className="nav-controls">
+          <span className="act-indicator">Part {currentAct.num}: {currentAct.name}</span>
+          <span className="slide-counter" aria-live="polite">
+            {currentSlide + 1} / {totalSlides}
+          </span>
+          <button 
+            className="menu-button"
+            onClick={() => setIsMenuOpen(true)}
+            aria-expanded={isMenuOpen}
+          >
+            All Slides
+          </button>
+        </div>
+      </header>
+      
+      <main id="main-content" role="main">
+        <article className="slide" aria-label={`Slide ${currentSlide + 1}: ${slide.title}`}>
+          <SlideComponent data={slide} />
+        </article>
+        
+        <nav className="navigation" aria-label="Slide navigation">
+          <button className="nav-btn" onClick={prevSlide} disabled={currentSlide === 0} aria-label="Previous slide">
+            ← Previous
+          </button>
+          <button className="nav-btn" onClick={nextSlide} disabled={currentSlide === totalSlides - 1} aria-label="Next slide">
+            Next →
+          </button>
+        </nav>
+      </main>
+      
+      <div className="progress-bar" role="progressbar" aria-valuenow={currentSlide + 1} aria-valuemin={1} aria-valuemax={totalSlides}>
+        <div className="progress-fill" style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }} />
+      </div>
+      
+      <div className="keyboard-hints" aria-hidden="true">
+        <span><kbd>←</kbd> <kbd>→</kbd> Navigate</span>
+        <span><kbd>Home</kbd> <kbd>End</kbd> Jump</span>
+      </div>
+      
+      {isMenuOpen && (
+        <div className="slide-menu-overlay" onClick={(e) => e.target === e.currentTarget && setIsMenuOpen(false)} role="dialog" aria-modal="true">
+          <div className="slide-menu">
+            <h2>Slides</h2>
+            
+            <div className="slide-menu-section">
+              <div className="section-label">Part 1: The Challenge</div>
+              <div className="slide-menu-list">
+                {slides.slice(0, 8).map((s, i) => (
+                  <button key={s.id} className={`slide-menu-item ${i === currentSlide ? 'active' : ''}`} onClick={() => goToSlide(i)}>
+                    <span className="slide-num">{i + 1}.</span>
+                    <span>{s.title}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            <div className="slide-menu-section">
+              <div className="section-label">Part 2: The Gap</div>
+              <div className="slide-menu-list">
+                {slides.slice(8, 12).map((s, i) => (
+                  <button key={s.id} className={`slide-menu-item ${i + 8 === currentSlide ? 'active' : ''}`} onClick={() => goToSlide(i + 8)}>
+                    <span className="slide-num">{i + 9}.</span>
+                    <span>{s.title}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            <div className="slide-menu-section">
+              <div className="section-label">Part 3: The Solution</div>
+              <div className="slide-menu-list">
+                {slides.slice(12, 21).map((s, i) => (
+                  <button key={s.id} className={`slide-menu-item ${i + 12 === currentSlide ? 'active' : ''}`} onClick={() => goToSlide(i + 12)}>
+                    <span className="slide-num">{i + 13}.</span>
+                    <span>{s.title}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            <div className="slide-menu-section">
+              <div className="section-label">Part 4: Practice</div>
+              <div className="slide-menu-list">
+                {slides.slice(21, 24).map((s, i) => (
+                  <button key={s.id} className={`slide-menu-item ${i + 21 === currentSlide ? 'active' : ''}`} onClick={() => goToSlide(i + 21)}>
+                    <span className="slide-num">{i + 22}.</span>
+                    <span>{s.title}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            <div className="slide-menu-section">
+              <div className="section-label">Closing</div>
+              <div className="slide-menu-list">
+                {slides.slice(24).map((s, i) => (
+                  <button key={s.id} className={`slide-menu-item ${i + 24 === currentSlide ? 'active' : ''}`} onClick={() => goToSlide(i + 24)}>
+                    <span className="slide-num">{i + 25}.</span>
+                    <span>{s.title}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+        // Mount the app
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<Presentation />);
     </script>

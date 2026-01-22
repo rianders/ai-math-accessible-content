@@ -55,11 +55,13 @@ Your presentation will be live at `https://YOUR-USERNAME.github.io/ai-math-acces
 
 ```
 .
-├── index.html                            # Main HTML file
-├── AI_Accessibility_Presentation.jsx     # React presentation component
+├── index.html                            # Self-contained presentation (HTML + inlined React component)
+├── AI_Accessibility_Presentation.jsx     # Source JSX file (for reference/editing)
 ├── workshop-planning-document.md         # Workshop planning notes
 └── README.md                             # This file
 ```
+
+**Note:** The presentation is entirely self-contained in `index.html`. The JSX file is kept as a source reference.
 
 ## License
 
