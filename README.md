@@ -15,6 +15,8 @@ This interactive presentation explores how AI can bridge accessibility gaps when
 - Hands-on practice with challenging content
 - The Markdown → HTML/MathML → Canvas pipeline
 
+**Accessibility:** This presentation itself follows WCAG 2.2 Level AA standards. See `ACCESSIBILITY.md` for details.
+
 ## Viewing the Presentation
 
 The presentation is hosted on GitHub Pages at: [https://YOUR-USERNAME.github.io/ai-math-accessible-content/](https://YOUR-USERNAME.github.io/ai-math-accessible-content/)

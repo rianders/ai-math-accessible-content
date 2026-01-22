@@ -723,8 +723,20 @@ AI Rules
           text-decoration: none;
           font-weight: 600;
         }
-        
+
         .skip-link:focus { top: 0; }
+
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border-width: 0;
+        }
         
         /* Header */
         .header {
@@ -796,7 +808,8 @@ AI Rules
         .menu-button {
           background: none;
           border: 2px solid var(--text-secondary);
-          padding: 8px 16px;
+          padding: 10px 18px;
+          min-height: 44px;
           border-radius: var(--radius-sm);
           font-size: 14px;
           font-weight: 600;
@@ -1914,7 +1927,8 @@ AI Rules
         .nav-btn {
           background: white;
           border: 2px solid #ddd;
-          padding: 10px 20px;
+          padding: 12px 24px;
+          min-height: 44px;
           border-radius: var(--radius-sm);
           font-size: 0.95rem;
           font-weight: 600;
@@ -1972,11 +1986,39 @@ AI Rules
         
         .slide-menu h2 {
           font-size: 1.2rem;
+          margin: 0;
+        }
+
+        .slide-menu-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           margin-bottom: 14px;
           padding-bottom: 10px;
           border-bottom: 2px solid var(--rutgers-scarlet);
         }
-        
+
+        .close-menu-btn {
+          background: none;
+          border: none;
+          font-size: 1.5rem;
+          color: var(--text-secondary);
+          cursor: pointer;
+          padding: 4px 8px;
+          min-width: 32px;
+          min-height: 32px;
+          border-radius: var(--radius-sm);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: var(--transition);
+        }
+
+        .close-menu-btn:hover {
+          background: #f0f0f5;
+          color: var(--rutgers-scarlet);
+        }
+
         .slide-menu-section { margin-bottom: 16px; }
         
         .section-label {
@@ -1994,7 +2036,8 @@ AI Rules
         .slide-menu-item {
           background: none;
           border: none;
-          padding: 8px 10px;
+          padding: 10px 12px;
+          min-height: 44px;
           text-align: left;
           cursor: pointer;
           border-radius: var(--radius-sm);
@@ -2002,6 +2045,7 @@ AI Rules
           transition: var(--transition);
           display: flex;
           gap: 8px;
+          align-items: center;
         }
         
         .slide-menu-item:hover { background: #f0f0f5; }
@@ -2060,7 +2104,65 @@ AI Rules
         "aria-expanded": isMenuOpen
       },
       "All Slides"
-    ))), /* @__PURE__ */ React.createElement("main", { id: "main-content", role: "main" }, /* @__PURE__ */ React.createElement("article", { className: "slide", "aria-label": `Slide ${currentSlide + 1}: ${slide.title}` }, /* @__PURE__ */ React.createElement(SlideComponent, { data: slide })), /* @__PURE__ */ React.createElement("nav", { className: "navigation", "aria-label": "Slide navigation" }, /* @__PURE__ */ React.createElement("button", { className: "nav-btn", onClick: prevSlide, disabled: currentSlide === 0, "aria-label": "Previous slide" }, "\u2190 Previous"), /* @__PURE__ */ React.createElement("button", { className: "nav-btn", onClick: nextSlide, disabled: currentSlide === totalSlides - 1, "aria-label": "Next slide" }, "Next \u2192"))), /* @__PURE__ */ React.createElement("div", { className: "progress-bar", role: "progressbar", "aria-valuenow": currentSlide + 1, "aria-valuemin": 1, "aria-valuemax": totalSlides }, /* @__PURE__ */ React.createElement("div", { className: "progress-fill", style: { width: `${(currentSlide + 1) / totalSlides * 100}%` } })), /* @__PURE__ */ React.createElement("div", { className: "keyboard-hints", "aria-hidden": "true" }, /* @__PURE__ */ React.createElement("span", null, /* @__PURE__ */ React.createElement("kbd", null, "\u2190"), " ", /* @__PURE__ */ React.createElement("kbd", null, "\u2192"), " Navigate"), /* @__PURE__ */ React.createElement("span", null, /* @__PURE__ */ React.createElement("kbd", null, "Home"), " ", /* @__PURE__ */ React.createElement("kbd", null, "End"), " Jump")), isMenuOpen && /* @__PURE__ */ React.createElement("div", { className: "slide-menu-overlay", onClick: (e) => e.target === e.currentTarget && setIsMenuOpen(false), role: "dialog", "aria-modal": "true" }, /* @__PURE__ */ React.createElement("div", { className: "slide-menu" }, /* @__PURE__ */ React.createElement("h2", null, "Slides"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 1: The Challenge"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(0, 8).map((s, i) => /* @__PURE__ */ React.createElement("button", { key: s.id, className: `slide-menu-item ${i === currentSlide ? "active" : ""}`, onClick: () => goToSlide(i) }, /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 1, "."), /* @__PURE__ */ React.createElement("span", null, s.title))))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 2: The Gap"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(8, 12).map((s, i) => /* @__PURE__ */ React.createElement("button", { key: s.id, className: `slide-menu-item ${i + 8 === currentSlide ? "active" : ""}`, onClick: () => goToSlide(i + 8) }, /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 9, "."), /* @__PURE__ */ React.createElement("span", null, s.title))))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 3: The Solution"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(12, 21).map((s, i) => /* @__PURE__ */ React.createElement("button", { key: s.id, className: `slide-menu-item ${i + 12 === currentSlide ? "active" : ""}`, onClick: () => goToSlide(i + 12) }, /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 13, "."), /* @__PURE__ */ React.createElement("span", null, s.title))))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 4: Practice"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(21, 24).map((s, i) => /* @__PURE__ */ React.createElement("button", { key: s.id, className: `slide-menu-item ${i + 21 === currentSlide ? "active" : ""}`, onClick: () => goToSlide(i + 21) }, /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 22, "."), /* @__PURE__ */ React.createElement("span", null, s.title))))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Closing"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(24).map((s, i) => /* @__PURE__ */ React.createElement("button", { key: s.id, className: `slide-menu-item ${i + 24 === currentSlide ? "active" : ""}`, onClick: () => goToSlide(i + 24) }, /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 25, "."), /* @__PURE__ */ React.createElement("span", null, s.title))))))));
+    ))), /* @__PURE__ */ React.createElement("div", { className: "sr-only", "aria-live": "assertive", "aria-atomic": "true" }, `Slide ${currentSlide + 1} of ${totalSlides}: ${slide.title}`), /* @__PURE__ */ React.createElement("main", { id: "main-content", role: "main" }, /* @__PURE__ */ React.createElement("article", { className: "slide", "aria-label": `Slide ${currentSlide + 1}: ${slide.title}` }, /* @__PURE__ */ React.createElement(SlideComponent, { data: slide })), /* @__PURE__ */ React.createElement("nav", { className: "navigation", "aria-label": "Slide navigation" }, /* @__PURE__ */ React.createElement("button", { className: "nav-btn", onClick: prevSlide, disabled: currentSlide === 0, "aria-label": "Previous slide" }, "\u2190 Previous"), /* @__PURE__ */ React.createElement("button", { className: "nav-btn", onClick: nextSlide, disabled: currentSlide === totalSlides - 1, "aria-label": "Next slide" }, "Next \u2192"))), /* @__PURE__ */ React.createElement("div", { className: "progress-bar", role: "progressbar", "aria-valuenow": currentSlide + 1, "aria-valuemin": 1, "aria-valuemax": totalSlides }, /* @__PURE__ */ React.createElement("div", { className: "progress-fill", style: { width: `${(currentSlide + 1) / totalSlides * 100}%` } })), /* @__PURE__ */ React.createElement("div", { className: "keyboard-hints", "aria-hidden": "true" }, /* @__PURE__ */ React.createElement("span", null, /* @__PURE__ */ React.createElement("kbd", null, "\u2190"), " ", /* @__PURE__ */ React.createElement("kbd", null, "\u2192"), " Navigate"), /* @__PURE__ */ React.createElement("span", null, /* @__PURE__ */ React.createElement("kbd", null, "Home"), " ", /* @__PURE__ */ React.createElement("kbd", null, "End"), " Jump")), isMenuOpen && /* @__PURE__ */ React.createElement("div", { className: "slide-menu-overlay", onClick: (e) => e.target === e.currentTarget && setIsMenuOpen(false), role: "dialog", "aria-modal": "true", "aria-label": "Slide navigation menu" }, /* @__PURE__ */ React.createElement("div", { className: "slide-menu" }, /* @__PURE__ */ React.createElement("div", { className: "slide-menu-header" }, /* @__PURE__ */ React.createElement("h2", { id: "slide-menu-title" }, "Slides"), /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        className: "close-menu-btn",
+        onClick: () => setIsMenuOpen(false),
+        "aria-label": "Close slide menu"
+      },
+      "\u2715"
+    )), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 1: The Challenge"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(0, 8).map((s, i) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: s.id,
+        className: `slide-menu-item ${i === currentSlide ? "active" : ""}`,
+        onClick: () => goToSlide(i),
+        "aria-current": i === currentSlide ? "page" : void 0
+      },
+      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 1, "."),
+      /* @__PURE__ */ React.createElement("span", null, s.title)
+    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 2: The Gap"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(8, 12).map((s, i) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: s.id,
+        className: `slide-menu-item ${i + 8 === currentSlide ? "active" : ""}`,
+        onClick: () => goToSlide(i + 8),
+        "aria-current": i + 8 === currentSlide ? "page" : void 0
+      },
+      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 9, "."),
+      /* @__PURE__ */ React.createElement("span", null, s.title)
+    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 3: The Solution"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(12, 21).map((s, i) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: s.id,
+        className: `slide-menu-item ${i + 12 === currentSlide ? "active" : ""}`,
+        onClick: () => goToSlide(i + 12),
+        "aria-current": i + 12 === currentSlide ? "page" : void 0
+      },
+      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 13, "."),
+      /* @__PURE__ */ React.createElement("span", null, s.title)
+    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 4: Practice"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(21, 24).map((s, i) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: s.id,
+        className: `slide-menu-item ${i + 21 === currentSlide ? "active" : ""}`,
+        onClick: () => goToSlide(i + 21),
+        "aria-current": i + 21 === currentSlide ? "page" : void 0
+      },
+      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 22, "."),
+      /* @__PURE__ */ React.createElement("span", null, s.title)
+    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Closing"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(24).map((s, i) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: s.id,
+        className: `slide-menu-item ${i + 24 === currentSlide ? "active" : ""}`,
+        onClick: () => goToSlide(i + 24),
+        "aria-current": i + 24 === currentSlide ? "page" : void 0
+      },
+      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 25, "."),
+      /* @__PURE__ */ React.createElement("span", null, s.title)
+    )))))));
   }
   return __toCommonJS(AI_Accessibility_Presentation_exports);
 })();

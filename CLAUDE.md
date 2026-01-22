@@ -60,6 +60,31 @@ GitHub Pages automatically rebuilds from the main branch.
 
 **Important:** Always run `npm run build` before committing to ensure `presentation.js` is up to date.
 
+## Accessibility
+
+This presentation follows WCAG 2.2 Level AA standards. See `ACCESSIBILITY.md` for full details.
+
+### Key Accessibility Features
+- Skip link to main content
+- Keyboard navigation (arrows, Home/End, Escape)
+- Screen reader announcements for slide changes
+- ARIA labels on all controls
+- Minimum 44x44px touch targets
+- 4.5:1 text contrast ratio
+- Focus indicators (3px outline)
+- Semantic HTML structure
+
+### When Editing
+
+**Always maintain accessibility:**
+- Use semantic HTML (h1-h6, nav, article, etc.)
+- Add `aria-label` to buttons without visible text
+- Mark decorative elements with `aria-hidden="true"`
+- Ensure color contrast meets 4.5:1 minimum
+- Keep interactive elements at least 44x44px
+- Test with keyboard navigation
+- Test with screen readers when possible
+
 ## Presentation Navigation
 
 - Arrow keys / Space / PageDown: Next slide
@@ -68,6 +93,7 @@ GitHub Pages automatically rebuilds from the main branch.
 - End: Last slide
 - Escape: Close slide menu
 - Click slide counter: Toggle slide menu
+- Tab / Shift+Tab: Navigate interactive elements
 
 ## Editing Content
 
