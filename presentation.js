@@ -574,8 +574,8 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
         { name: "Course Accessibility Resources", type: "Resources", url: "https://academicaffairs.rutgers.edu/course-accessibility-resources" },
         { name: "Making Math Accessible", type: "Resources", url: "https://radr.rutgers.edu/resource/making-math-accessible" },
         { name: "Making Learning Accessible for All: Meeting ADA Title II Standards", type: "Policy" },
-        { name: "Rutgers University Digital Accessibility Policy", type: "Policy" },
-        { name: "Workshop Prompt Templates", type: "Toolkit" }
+        { name: "General Images Prompt Template", type: "Toolkit", url: "https://rianders.github.io/ai-math-accessible-content/templates/general-images-prompt.md" },
+        { name: "Math & Science Prompt Template", type: "Toolkit", url: "https://rianders.github.io/ai-math-accessible-content/templates/math-science-prompt.md" }
       ],
       question: "What other challenging content types should we address in future workshops?"
     },
