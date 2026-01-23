@@ -547,6 +547,13 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     title: 'Continue Learning',
     categories: [
       {
+        heading: 'RU Online Conference',
+        org: 'Office of University Online Education Services',
+        sessions: [
+          { name: 'RU Online 2026 Conference', date: 'March 16, 2026', link: 'https://uoes.rutgers.edu/event/ruonlinecon-2026' }
+        ]
+      },
+      {
         heading: 'Accessibility Workshops',
         org: 'Office of University Online Education Services',
         placeholder: {
@@ -1150,7 +1157,13 @@ const UpcomingWorkshopsSlide = ({ data }) => (
             <div className="session-list">
               {cat.sessions.map((session, j) => (
                 <div key={j} className="session-item">
-                  <span className="session-name">{session.name}</span>
+                  {session.link ? (
+                    <a href={session.link} target="_blank" rel="noopener noreferrer" className="session-name session-link">
+                      {session.name}
+                    </a>
+                  ) : (
+                    <span className="session-name">{session.name}</span>
+                  )}
                   <span className="session-date">{session.date}</span>
                 </div>
               ))}
@@ -2678,12 +2691,23 @@ export default function Presentation() {
           font-size: 0.9rem;
           margin-bottom: 4px;
         }
-        
+
+        .session-link {
+          color: white;
+          text-decoration: none;
+          transition: var(--transition);
+        }
+
+        .session-link:hover {
+          text-decoration: underline;
+          opacity: 0.9;
+        }
+
         .session-date {
           font-size: 0.8rem;
           opacity: 0.9;
         }
-        
+
         /* Closing */
         .closing-slide {
           text-align: center;

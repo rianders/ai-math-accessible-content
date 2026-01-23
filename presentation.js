@@ -566,6 +566,13 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       title: "Continue Learning",
       categories: [
         {
+          heading: "RU Online Conference",
+          org: "Office of University Online Education Services",
+          sessions: [
+            { name: "RU Online 2026 Conference", date: "March 16, 2026", link: "https://uoes.rutgers.edu/event/ruonlinecon-2026" }
+          ]
+        },
+        {
           heading: "Accessibility Workshops",
           org: "Office of University Online Education Services",
           placeholder: {
@@ -638,7 +645,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
   var StudentSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content student-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("p", { className: "student-subtitle" }, data.subtitle), /* @__PURE__ */ React.createElement("div", { className: "student-examples" }, data.points.map((point, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "student-example" }, /* @__PURE__ */ React.createElement("p", { className: "student-prompt" }, '"', point.prompt, '"'), /* @__PURE__ */ React.createElement("p", { className: "student-use" }, point.use)))), data.note && /* @__PURE__ */ React.createElement("p", { className: "slide-note" }, data.note));
   var TakeawaysSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content takeaways-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("div", { className: "takeaways-list" }, data.items.map((item, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "takeaway-item" }, /* @__PURE__ */ React.createElement("h3", null, item.point), /* @__PURE__ */ React.createElement("p", null, item.detail)))));
   var ResourcesSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("ul", { className: "resources-list", role: "list" }, data.resources.map((r, i) => /* @__PURE__ */ React.createElement("li", { key: i }, /* @__PURE__ */ React.createElement("span", { className: "resource-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "resource-type" }, r.type)))), /* @__PURE__ */ React.createElement("p", { className: "closing-question" }, data.question));
-  var UpcomingWorkshopsSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content upcoming-workshops-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("div", { className: "workshop-categories" }, data.categories.map((cat, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "workshop-category" }, /* @__PURE__ */ React.createElement("h3", null, cat.heading), /* @__PURE__ */ React.createElement("p", { className: "org-name" }, cat.org), cat.sessions ? /* @__PURE__ */ React.createElement("div", { className: "session-list" }, cat.sessions.map((session, j) => /* @__PURE__ */ React.createElement("div", { key: j, className: "session-item" }, /* @__PURE__ */ React.createElement("span", { className: "session-name" }, session.name), /* @__PURE__ */ React.createElement("span", { className: "session-date" }, session.date)))) : cat.placeholder ? /* @__PURE__ */ React.createElement("div", { className: "placeholder-box small" }, /* @__PURE__ */ React.createElement("div", { className: "placeholder-header" }, "\u{1F4C5} ", cat.placeholder.instruction), /* @__PURE__ */ React.createElement("ul", { className: "placeholder-suggestions" }, cat.placeholder.suggestions.map((s, j) => /* @__PURE__ */ React.createElement("li", { key: j }, s)))) : null))));
+  var UpcomingWorkshopsSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content upcoming-workshops-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("div", { className: "workshop-categories" }, data.categories.map((cat, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "workshop-category" }, /* @__PURE__ */ React.createElement("h3", null, cat.heading), /* @__PURE__ */ React.createElement("p", { className: "org-name" }, cat.org), cat.sessions ? /* @__PURE__ */ React.createElement("div", { className: "session-list" }, cat.sessions.map((session, j) => /* @__PURE__ */ React.createElement("div", { key: j, className: "session-item" }, session.link ? /* @__PURE__ */ React.createElement("a", { href: session.link, target: "_blank", rel: "noopener noreferrer", className: "session-name session-link" }, session.name) : /* @__PURE__ */ React.createElement("span", { className: "session-name" }, session.name), /* @__PURE__ */ React.createElement("span", { className: "session-date" }, session.date)))) : cat.placeholder ? /* @__PURE__ */ React.createElement("div", { className: "placeholder-box small" }, /* @__PURE__ */ React.createElement("div", { className: "placeholder-header" }, "\u{1F4C5} ", cat.placeholder.instruction), /* @__PURE__ */ React.createElement("ul", { className: "placeholder-suggestions" }, cat.placeholder.suggestions.map((s, j) => /* @__PURE__ */ React.createElement("li", { key: j }, s)))) : null))));
   var ClosingSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content closing-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("div", { className: "contacts" }, data.contacts.map((c, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "contact" }, /* @__PURE__ */ React.createElement("span", { className: "contact-name" }, c.name), /* @__PURE__ */ React.createElement("a", { href: `mailto:${c.email}`, className: "contact-email" }, c.email)))), /* @__PURE__ */ React.createElement("p", { className: "closing-org" }, data.org));
   var slideComponents = {
     title: TitleSlide,
@@ -2123,12 +2130,23 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
           font-size: 0.9rem;
           margin-bottom: 4px;
         }
-        
+
+        .session-link {
+          color: white;
+          text-decoration: none;
+          transition: var(--transition);
+        }
+
+        .session-link:hover {
+          text-decoration: underline;
+          opacity: 0.9;
+        }
+
         .session-date {
           font-size: 0.8rem;
           opacity: 0.9;
         }
-        
+
         /* Closing */
         .closing-slide {
           text-align: center;
