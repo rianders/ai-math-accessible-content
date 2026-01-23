@@ -575,13 +575,10 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
         {
           heading: "Accessibility Workshops",
           org: "Office of University Online Education Services",
-          placeholder: {
-            instruction: "ADD: Current accessibility workshop schedule",
-            suggestions: [
-              "Workshop title, date, registration link",
-              "Workshop title, date, registration link"
-            ]
-          }
+          sessions: [
+            { name: "Using Kaltura's Accessibility Features for Videos Shared in Canvas", date: "February 3, 2026 @ 2:00 pm - 3:00 pm", link: "https://uoes.rutgers.edu/event/using-kalturas-accessibility-features-videos-shared-canvas" },
+            { name: "Creating Accessible STEM Equations", date: "February 11, 2026 @ 11:00 am - 12:00 pm", link: "https://uoes.rutgers.edu/event/creating-accessible-stem-equations" }
+          ]
         },
         {
           heading: "GenAI Workshops",
