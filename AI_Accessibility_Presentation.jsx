@@ -959,7 +959,11 @@ const SolutionSlide = ({ data }) => (
     <div className="tools-grid">
       {data.tools.map((tool, i) => (
         <div key={i} className="tool-card">
-          <h3>{tool.name}</h3>
+          {tool.url ? (
+            <h3><a href={tool.url} target="_blank" rel="noopener noreferrer" className="tool-link">{tool.name}</a></h3>
+          ) : (
+            <h3>{tool.name}</h3>
+          )}
           <p>{tool.capability}</p>
         </div>
       ))}
@@ -2309,6 +2313,8 @@ export default function Presentation() {
         
         .tool-card h3 { color: white; margin-bottom: 6px; font-size: 1rem; }
         .tool-card p { font-size: 0.85rem; opacity: 0.9; }
+        .tool-link { color: white; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+        .tool-link:hover { opacity: 0.9; }
         
         .keypoint {
           text-align: center;
