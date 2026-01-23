@@ -13,6 +13,18 @@ const slides = [
   },
   {
     id: 2,
+    type: 'access-materials',
+    title: 'Access This Presentation',
+    url: 'https://rianders.github.io/ai-math-accessible-content/',
+    shortUrl: 'rianders.github.io/ai-math-accessible-content',
+    instructions: [
+      'Scan the QR code with your mobile device',
+      'Or visit the URL in your browser',
+      'Bookmark for future reference'
+    ]
+  },
+  {
+    id: 3,
     type: 'agenda',
     title: 'Workshop Agenda',
     duration: '90 minutes',
@@ -25,7 +37,7 @@ const slides = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     type: 'objectives',
     title: 'Workshop Objectives',
     subtitle: 'By the end of this session, you will be able to:',
@@ -38,7 +50,7 @@ const slides = [
     ]
   },
   {
-    id: 4,
+    id: 6,
     type: 'alert',
     title: 'The Accessibility Imperative',
     headline: 'Making Learning Accessible for All: Meeting ADA Title II Standards',
@@ -46,7 +58,7 @@ const slides = [
     question: 'How do we ensure ALL course content—including the hard stuff—is accessible?'
   },
   {
-    id: 5,
+    id: 6,
     type: 'content-challenges',
     title: 'What Content Needs to be Accessible?',
     intro: 'Existing tools move us a long way toward our goal, but each content type has difficult edge cases:',
@@ -60,7 +72,7 @@ const slides = [
     note: 'Today we focus on the image challenges—particularly math notation and handwritten content—where AI tools can help bridge the gap.'
   },
   {
-    id: 6,
+    id: 7,
     type: 'toolkit',
     title: 'Our Existing Toolkit at Rutgers',
     intro: 'These built-in tools handle standard accessibility tasks well:',
@@ -86,7 +98,7 @@ const slides = [
     ]
   },
   {
-    id: 7,
+    id: 8,
     type: 'standards',
     title: 'Our Target: WCAG Standards',
     subtitle: 'POUR Principles',
@@ -98,7 +110,7 @@ const slides = [
     ]
   },
   {
-    id: 8,
+    id: 9,
     type: 'success-with-examples',
     title: 'Where Built-in Tools Excel',
     intro: 'ALLY and PowerPoint handle these well:',
@@ -123,7 +135,7 @@ const slides = [
 
   // ACT 2: THE GAP
   {
-    id: 9,
+    id: 10,
     type: 'problem-with-examples',
     title: 'Where Built-in Tools Fail Us',
     intro: 'But what about content like this?',
@@ -147,7 +159,7 @@ const slides = [
     }
   },
   {
-    id: 10,
+    id: 11,
     type: 'focus-with-examples',
     title: 'Focus: Math & Scientific Notation',
     subtitle: 'Why is this particularly challenging?',
@@ -181,7 +193,7 @@ const slides = [
     }
   },
   {
-    id: 11,
+    id: 12,
     type: 'screen-reader-demo',
     title: 'Hearing the Difference: Screen Reader Demo',
     subtitle: 'What does inaccessible content sound like?',
@@ -201,7 +213,7 @@ const slides = [
     }
   },
   {
-    id: 12,
+    id: 13,
     type: 'gap-example',
     title: 'The Accessibility Gap in STEM',
     subtitle: 'What happens when tools fail:',
@@ -226,7 +238,7 @@ const slides = [
 
   // ACT 3: THE SOLUTION
   {
-    id: 13,
+    id: 14,
     type: 'solution',
     title: 'Enter AI-Enabled Tools',
     subtitle: 'Multimodal AI can bridge the gap',
@@ -241,7 +253,7 @@ const slides = [
     pipelineNote: 'AI Tool → LaTeX/MathML → Canvas → MathJax renders → Screen readers can read'
   },
   {
-    id: 14,
+    id: 15,
     type: 'framework',
     title: 'The Prompt Framework',
     heading: 'Getting good results requires good prompts:',
@@ -254,7 +266,7 @@ const slides = [
     ]
   },
   {
-    id: 15,
+    id: 16,
     type: 'workflow-example',
     title: 'Prompt Framework in Action',
     subtitle: 'A complete example from image to accessible content',
@@ -279,7 +291,7 @@ const slides = [
     }
   },
   {
-    id: 16,
+    id: 17,
     type: 'prompt-example',
     title: 'Example Prompt: General Images',
     subtitle: 'For photographs, diagrams, icons, and standard visuals',
@@ -312,7 +324,7 @@ AI Rules
 • Prioritize the most relevant interpretation for the learner.`
   },
   {
-    id: 17,
+    id: 18,
     type: 'prompt-example',
     title: 'Example Prompt: Math & Science Images',
     subtitle: 'For equations, graphs, scientific notation, and handwritten content',
@@ -361,7 +373,7 @@ AI Rules
 • Consider: what does the student need to understand from this image?`
   },
   {
-    id: 18,
+    id: 19,
     type: 'setup',
     title: 'Setting Up Your AI Workflow',
     subtitle: 'Save time with reusable configurations',
@@ -384,7 +396,7 @@ AI Rules
     ]
   },
   {
-    id: 19,
+    id: 20,
     type: 'demo',
     title: 'Demo: Math Notation → Accessible Text',
     description: 'Converting an equation image to accessible format',
@@ -402,7 +414,7 @@ AI Rules
     }
   },
   {
-    id: 20,
+    id: 21,
     type: 'demo',
     title: 'Demo: Handwritten Notes → Digital Text',
     description: 'Converting lecture whiteboard captures',
@@ -421,7 +433,7 @@ AI Rules
     ]
   },
   {
-    id: 21,
+    id: 22,
     type: 'workflow',
     title: 'The Complete Accessible Workflow',
     subtitle: 'Combining built-in tools with AI assistance',
@@ -442,7 +454,7 @@ AI Rules
 
   // ACT 4: PRACTICE & APPLICATION
   {
-    id: 22,
+    id: 23,
     type: 'activity',
     title: 'Hands-On Activity',
     subtitle: 'Try it with challenging content',
@@ -456,7 +468,7 @@ AI Rules
     timeboxed: '15 minutes'
   },
   {
-    id: 23,
+    id: 24,
     type: 'discussion',
     title: 'Debrief: Comparing Results',
     questions: [
@@ -468,7 +480,7 @@ AI Rules
     insight: 'AI tools are powerful assistants, but human expertise remains essential for verification.'
   },
   {
-    id: 24,
+    id: 25,
     type: 'student',
     title: 'The Student Perspective',
     subtitle: 'Empowering students to help themselves',
@@ -491,7 +503,7 @@ AI Rules
 
   // CLOSING
   {
-    id: 25,
+    id: 26,
     type: 'takeaways',
     title: 'Key Takeaways',
     items: [
@@ -504,7 +516,7 @@ AI Rules
     ]
   },
   {
-    id: 26,
+    id: 27,
     type: 'resources',
     title: 'Resources',
     resources: [
@@ -516,7 +528,7 @@ AI Rules
     question: 'What other challenging content types should we address in future workshops?'
   },
   {
-    id: 27,
+    id: 28,
     type: 'upcoming-workshops',
     title: 'Continue Learning',
     categories: [
@@ -542,7 +554,7 @@ AI Rules
     ]
   },
   {
-    id: 28,
+    id: 29,
     type: 'closing',
     title: 'Thank You!',
     contacts: [
@@ -563,6 +575,36 @@ const TitleSlide = ({ data }) => (
       <p className="presenter">{data.presenter}</p>
       <p className="org">{data.org}</p>
       <p className="date">{data.date}</p>
+    </div>
+  </div>
+);
+
+const AccessMaterialsSlide = ({ data }) => (
+  <div className="slide-content access-materials-slide">
+    <h2>{data.title}</h2>
+    <div className="access-content">
+      <div className="qr-section">
+        <div className="qr-code-container">
+          <img
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(data.url)}`}
+            alt={`QR code linking to ${data.url}`}
+            className="qr-code"
+          />
+        </div>
+        <p className="qr-label">Scan to access on your device</p>
+      </div>
+      <div className="url-section">
+        <div className="url-display">
+          <a href={data.url} target="_blank" rel="noopener noreferrer" className="presentation-url">
+            {data.shortUrl}
+          </a>
+        </div>
+        <ul className="access-instructions" role="list">
+          {data.instructions.map((instruction, i) => (
+            <li key={i}>{instruction}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   </div>
 );
@@ -1097,6 +1139,7 @@ const ClosingSlide = ({ data }) => (
 
 const slideComponents = {
   title: TitleSlide,
+  'access-materials': AccessMaterialsSlide,
   agenda: AgendaSlide,
   objectives: ObjectivesSlide,
   alert: AlertSlide,
@@ -1169,10 +1212,10 @@ export default function Presentation() {
   
   // Determine which "act" we're in for visual indicator
   const getAct = (slideIndex) => {
-    if (slideIndex < 8) return { num: 1, name: 'The Challenge' };
-    if (slideIndex < 12) return { num: 2, name: 'The Gap' };
-    if (slideIndex < 21) return { num: 3, name: 'The Solution' };
-    if (slideIndex < 24) return { num: 4, name: 'Practice' };
+    if (slideIndex < 9) return { num: 1, name: 'The Challenge' };
+    if (slideIndex < 13) return { num: 2, name: 'The Gap' };
+    if (slideIndex < 22) return { num: 3, name: 'The Solution' };
+    if (slideIndex < 25) return { num: 4, name: 'Practice' };
     return { num: 5, name: 'Closing' };
   };
   
@@ -1504,7 +1547,99 @@ export default function Presentation() {
         
         .presenter { font-weight: 600; font-size: 1.05rem; margin-bottom: 4px; }
         .org, .date { color: var(--text-secondary); font-size: 0.9rem; }
-        
+
+        /* Access Materials */
+        .access-materials-slide {
+          text-align: center;
+        }
+
+        .access-content {
+          display: flex;
+          gap: 60px;
+          align-items: center;
+          justify-content: center;
+          margin-top: 40px;
+        }
+
+        .qr-section {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+        }
+
+        .qr-code-container {
+          background: white;
+          padding: 20px;
+          border-radius: var(--radius-md);
+          box-shadow: var(--shadow-md);
+          border: 3px solid var(--rutgers-scarlet);
+        }
+
+        .qr-code {
+          display: block;
+          width: 300px;
+          height: 300px;
+        }
+
+        .qr-label {
+          font-size: 0.95rem;
+          color: var(--text-secondary);
+          font-weight: 600;
+        }
+
+        .url-section {
+          text-align: left;
+          max-width: 400px;
+        }
+
+        .url-display {
+          background: var(--rutgers-light);
+          padding: 20px;
+          border-radius: var(--radius-md);
+          border-left: 4px solid var(--rutgers-scarlet);
+          margin-bottom: 24px;
+        }
+
+        .presentation-url {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: var(--rutgers-scarlet);
+          text-decoration: none;
+          word-break: break-all;
+          display: block;
+        }
+
+        .presentation-url:hover {
+          text-decoration: underline;
+        }
+
+        .access-instructions {
+          list-style: none;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+
+        .access-instructions li {
+          padding: 12px 16px;
+          background: #f8f9fa;
+          border-radius: var(--radius-sm);
+          font-size: 0.95rem;
+          position: relative;
+          padding-left: 40px;
+        }
+
+        .access-instructions li::before {
+          content: '✓';
+          position: absolute;
+          left: 16px;
+          color: var(--accent-green);
+          font-weight: 700;
+          font-size: 1.1rem;
+        }
+
         /* Agenda */
         .agenda-slide h2 { margin-bottom: 8px; }
         
@@ -2601,6 +2736,10 @@ export default function Presentation() {
           .keyboard-hints { display: none; }
           .act-indicator { display: none; }
           .workshop-categories { grid-template-columns: 1fr; }
+          .access-content { flex-direction: column; gap: 30px; }
+          .qr-code { width: 250px; height: 250px; }
+          .url-section { max-width: 100%; }
+          .presentation-url { font-size: 1rem; }
         }
       `}</style>
       
@@ -2674,7 +2813,7 @@ export default function Presentation() {
             <div className="slide-menu-section">
               <div className="section-label">Part 1: The Challenge</div>
               <div className="slide-menu-list">
-                {slides.slice(0, 8).map((s, i) => (
+                {slides.slice(0, 9).map((s, i) => (
                   <button
                     key={s.id}
                     className={`slide-menu-item ${i === currentSlide ? 'active' : ''}`}
@@ -2687,69 +2826,69 @@ export default function Presentation() {
                 ))}
               </div>
             </div>
-            
+
             <div className="slide-menu-section">
               <div className="section-label">Part 2: The Gap</div>
               <div className="slide-menu-list">
-                {slides.slice(8, 12).map((s, i) => (
+                {slides.slice(9, 13).map((s, i) => (
                   <button
                     key={s.id}
-                    className={`slide-menu-item ${i + 8 === currentSlide ? 'active' : ''}`}
-                    onClick={() => goToSlide(i + 8)}
-                    aria-current={i + 8 === currentSlide ? 'page' : undefined}
+                    className={`slide-menu-item ${i + 9 === currentSlide ? 'active' : ''}`}
+                    onClick={() => goToSlide(i + 9)}
+                    aria-current={i + 9 === currentSlide ? 'page' : undefined}
                   >
-                    <span className="slide-num">{i + 9}.</span>
+                    <span className="slide-num">{i + 10}.</span>
                     <span>{s.title}</span>
                   </button>
                 ))}
               </div>
             </div>
-            
+
             <div className="slide-menu-section">
               <div className="section-label">Part 3: The Solution</div>
               <div className="slide-menu-list">
-                {slides.slice(12, 21).map((s, i) => (
+                {slides.slice(13, 22).map((s, i) => (
                   <button
                     key={s.id}
-                    className={`slide-menu-item ${i + 12 === currentSlide ? 'active' : ''}`}
-                    onClick={() => goToSlide(i + 12)}
-                    aria-current={i + 12 === currentSlide ? 'page' : undefined}
+                    className={`slide-menu-item ${i + 13 === currentSlide ? 'active' : ''}`}
+                    onClick={() => goToSlide(i + 13)}
+                    aria-current={i + 13 === currentSlide ? 'page' : undefined}
                   >
-                    <span className="slide-num">{i + 13}.</span>
+                    <span className="slide-num">{i + 14}.</span>
                     <span>{s.title}</span>
                   </button>
                 ))}
               </div>
             </div>
-            
+
             <div className="slide-menu-section">
               <div className="section-label">Part 4: Practice</div>
               <div className="slide-menu-list">
-                {slides.slice(21, 24).map((s, i) => (
+                {slides.slice(22, 25).map((s, i) => (
                   <button
                     key={s.id}
-                    className={`slide-menu-item ${i + 21 === currentSlide ? 'active' : ''}`}
-                    onClick={() => goToSlide(i + 21)}
-                    aria-current={i + 21 === currentSlide ? 'page' : undefined}
+                    className={`slide-menu-item ${i + 22 === currentSlide ? 'active' : ''}`}
+                    onClick={() => goToSlide(i + 22)}
+                    aria-current={i + 22 === currentSlide ? 'page' : undefined}
                   >
-                    <span className="slide-num">{i + 22}.</span>
+                    <span className="slide-num">{i + 23}.</span>
                     <span>{s.title}</span>
                   </button>
                 ))}
               </div>
             </div>
-            
+
             <div className="slide-menu-section">
               <div className="section-label">Closing</div>
               <div className="slide-menu-list">
-                {slides.slice(24).map((s, i) => (
+                {slides.slice(25).map((s, i) => (
                   <button
                     key={s.id}
-                    className={`slide-menu-item ${i + 24 === currentSlide ? 'active' : ''}`}
-                    onClick={() => goToSlide(i + 24)}
-                    aria-current={i + 24 === currentSlide ? 'page' : undefined}
+                    className={`slide-menu-item ${i + 25 === currentSlide ? 'active' : ''}`}
+                    onClick={() => goToSlide(i + 25)}
+                    aria-current={i + 25 === currentSlide ? 'page' : undefined}
                   >
-                    <span className="slide-num">{i + 25}.</span>
+                    <span className="slide-num">{i + 26}.</span>
                     <span>{s.title}</span>
                   </button>
                 ))}
