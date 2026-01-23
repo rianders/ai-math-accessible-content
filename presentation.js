@@ -96,6 +96,21 @@ var PresentationModule = (() => {
     },
     {
       id: 7,
+      type: "pdf-inspector",
+      title: "PDF Inspector Tool",
+      subtitle: "Investigate PDF accessibility issues and preview screen reader experience",
+      url: "https://huggingface.co/spaces/rianders/pdfinspector",
+      shortUrl: "huggingface.co/spaces/rianders/pdfinspector",
+      features: [
+        "Upload any PDF to analyze its accessibility",
+        "See how screen readers interpret the document",
+        "Identify missing tags, reading order issues, and more",
+        "Get specific feedback on what needs fixing"
+      ],
+      callToAction: "Try it with your own PDFs during the workshop!"
+    },
+    {
+      id: 9,
       type: "toolkit",
       title: "Our Existing Toolkit at Rutgers",
       intro: "These built-in tools handle standard accessibility tasks well:",
@@ -121,7 +136,7 @@ var PresentationModule = (() => {
       ]
     },
     {
-      id: 8,
+      id: 9,
       type: "standards",
       title: "Our Target: WCAG Standards",
       subtitle: "POUR Principles",
@@ -133,7 +148,7 @@ var PresentationModule = (() => {
       ]
     },
     {
-      id: 9,
+      id: 10,
       type: "success-with-examples",
       title: "Where Built-in Tools Excel",
       intro: "ALLY and PowerPoint handle these well:",
@@ -157,7 +172,7 @@ var PresentationModule = (() => {
     },
     // ACT 2: THE GAP
     {
-      id: 10,
+      id: 11,
       type: "problem-with-examples",
       title: "Where Built-in Tools Fail Us",
       intro: "But what about content like this?",
@@ -181,7 +196,7 @@ var PresentationModule = (() => {
       }
     },
     {
-      id: 11,
+      id: 12,
       type: "focus-with-examples",
       title: "Focus: Math & Scientific Notation",
       subtitle: "Why is this particularly challenging?",
@@ -215,7 +230,7 @@ var PresentationModule = (() => {
       }
     },
     {
-      id: 12,
+      id: 13,
       type: "screen-reader-demo",
       title: "Hearing the Difference: Screen Reader Demo",
       subtitle: "What does inaccessible content sound like?",
@@ -235,7 +250,7 @@ var PresentationModule = (() => {
       }
     },
     {
-      id: 13,
+      id: 14,
       type: "gap-example",
       title: "The Accessibility Gap in STEM",
       subtitle: "What happens when tools fail:",
@@ -259,7 +274,7 @@ var PresentationModule = (() => {
     },
     // ACT 3: THE SOLUTION
     {
-      id: 14,
+      id: 15,
       type: "solution",
       title: "Enter AI-Enabled Tools",
       subtitle: "Multimodal AI can bridge the gap",
@@ -274,7 +289,7 @@ var PresentationModule = (() => {
       pipelineNote: "AI Tool \u2192 LaTeX/MathML \u2192 Canvas \u2192 MathJax renders \u2192 Screen readers can read"
     },
     {
-      id: 15,
+      id: 16,
       type: "framework",
       title: "The Prompt Framework",
       heading: "Getting good results requires good prompts:",
@@ -287,7 +302,7 @@ var PresentationModule = (() => {
       ]
     },
     {
-      id: 16,
+      id: 17,
       type: "workflow-example",
       title: "Prompt Framework in Action",
       subtitle: "A complete example from image to accessible content",
@@ -312,7 +327,7 @@ var PresentationModule = (() => {
       }
     },
     {
-      id: 17,
+      id: 18,
       type: "prompt-example",
       title: "Example Prompt: General Images",
       subtitle: "For photographs, diagrams, icons, and standard visuals",
@@ -345,7 +360,7 @@ AI Rules
 \u2022 Prioritize the most relevant interpretation for the learner.`
     },
     {
-      id: 18,
+      id: 19,
       type: "prompt-example",
       title: "Example Prompt: Math & Science Images",
       subtitle: "For equations, graphs, scientific notation, and handwritten content",
@@ -394,7 +409,7 @@ AI Rules
 \u2022 Consider: what does the student need to understand from this image?`
     },
     {
-      id: 19,
+      id: 20,
       type: "setup",
       title: "Setting Up Your AI Workflow",
       subtitle: "Save time with reusable configurations",
@@ -417,7 +432,7 @@ AI Rules
       ]
     },
     {
-      id: 20,
+      id: 21,
       type: "demo",
       title: "Demo: Math Notation \u2192 Accessible Text",
       description: "Converting an equation image to accessible format",
@@ -435,7 +450,7 @@ AI Rules
       }
     },
     {
-      id: 21,
+      id: 22,
       type: "demo",
       title: "Demo: Handwritten Notes \u2192 Digital Text",
       description: "Converting lecture whiteboard captures",
@@ -454,7 +469,7 @@ AI Rules
       ]
     },
     {
-      id: 22,
+      id: 23,
       type: "workflow",
       title: "The Complete Accessible Workflow",
       subtitle: "Combining built-in tools with AI assistance",
@@ -474,7 +489,7 @@ AI Rules
     },
     // ACT 4: PRACTICE & APPLICATION
     {
-      id: 23,
+      id: 24,
       type: "activity",
       title: "Hands-On Activity",
       subtitle: "Try it with challenging content",
@@ -488,7 +503,7 @@ AI Rules
       timeboxed: "15 minutes"
     },
     {
-      id: 24,
+      id: 25,
       type: "discussion",
       title: "Debrief: Comparing Results",
       questions: [
@@ -500,7 +515,7 @@ AI Rules
       insight: "AI tools are powerful assistants, but human expertise remains essential for verification."
     },
     {
-      id: 25,
+      id: 26,
       type: "student",
       title: "The Student Perspective",
       subtitle: "Empowering students to help themselves",
@@ -522,7 +537,7 @@ AI Rules
     },
     // CLOSING
     {
-      id: 26,
+      id: 27,
       type: "takeaways",
       title: "Key Takeaways",
       items: [
@@ -535,7 +550,7 @@ AI Rules
       ]
     },
     {
-      id: 27,
+      id: 28,
       type: "resources",
       title: "Resources",
       resources: [
@@ -547,7 +562,7 @@ AI Rules
       question: "What other challenging content types should we address in future workshops?"
     },
     {
-      id: 28,
+      id: 29,
       type: "upcoming-workshops",
       title: "Continue Learning",
       categories: [
@@ -573,7 +588,7 @@ AI Rules
       ]
     },
     {
-      id: 29,
+      id: 30,
       type: "closing",
       title: "Thank You!",
       contacts: [
@@ -592,6 +607,14 @@ AI Rules
       className: "qr-code"
     }
   )), /* @__PURE__ */ React.createElement("p", { className: "qr-label" }, "Scan to access on your device")), /* @__PURE__ */ React.createElement("div", { className: "url-section" }, /* @__PURE__ */ React.createElement("div", { className: "url-display" }, /* @__PURE__ */ React.createElement("a", { href: data.url, target: "_blank", rel: "noopener noreferrer", className: "presentation-url" }, data.shortUrl)), /* @__PURE__ */ React.createElement("ul", { className: "access-instructions", role: "list" }, data.instructions.map((instruction, i) => /* @__PURE__ */ React.createElement("li", { key: i }, instruction))))));
+  var PDFInspectorSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content pdf-inspector-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("p", { className: "pdf-inspector-subtitle" }, data.subtitle), /* @__PURE__ */ React.createElement("div", { className: "pdf-inspector-content" }, /* @__PURE__ */ React.createElement("div", { className: "qr-section" }, /* @__PURE__ */ React.createElement("div", { className: "qr-code-container" }, /* @__PURE__ */ React.createElement(
+    "img",
+    {
+      src: `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(data.url)}`,
+      alt: `QR code linking to ${data.url}`,
+      className: "qr-code"
+    }
+  )), /* @__PURE__ */ React.createElement("p", { className: "qr-label" }, "Scan to try it now")), /* @__PURE__ */ React.createElement("div", { className: "tool-info" }, /* @__PURE__ */ React.createElement("div", { className: "url-display-small" }, /* @__PURE__ */ React.createElement("a", { href: data.url, target: "_blank", rel: "noopener noreferrer", className: "tool-url" }, data.shortUrl)), /* @__PURE__ */ React.createElement("h3", { className: "features-heading" }, "Key Features:"), /* @__PURE__ */ React.createElement("ul", { className: "tool-features", role: "list" }, data.features.map((feature, i) => /* @__PURE__ */ React.createElement("li", { key: i }, feature))), /* @__PURE__ */ React.createElement("div", { className: "call-to-action" }, data.callToAction))));
   var AgendaSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content agenda-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("p", { className: "duration-badge" }, "Duration: ", data.duration), /* @__PURE__ */ React.createElement("div", { className: "agenda-items" }, data.sections.map((section, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "agenda-item" }, /* @__PURE__ */ React.createElement("div", { className: "agenda-num" }, i + 1), /* @__PURE__ */ React.createElement("div", { className: "agenda-content" }, /* @__PURE__ */ React.createElement("h3", null, section.name), /* @__PURE__ */ React.createElement("p", null, section.desc)), /* @__PURE__ */ React.createElement("div", { className: "agenda-time" }, section.time)))));
   var ObjectivesSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("p", { className: "objectives-subtitle" }, data.subtitle), /* @__PURE__ */ React.createElement("ul", { className: "objectives-list", role: "list" }, data.items.map((item, i) => /* @__PURE__ */ React.createElement("li", { key: i }, /* @__PURE__ */ React.createElement("span", { className: "verb" }, item.verb), /* @__PURE__ */ React.createElement("span", null, item.text)))));
   var AlertSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content alert-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("div", { className: "alert-box", role: "alert" }, /* @__PURE__ */ React.createElement("h3", null, data.headline), /* @__PURE__ */ React.createElement("p", { className: "deadline" }, data.deadline)), /* @__PURE__ */ React.createElement("p", { className: "question" }, data.question));
@@ -626,6 +649,7 @@ AI Rules
     alert: AlertSlide,
     "content-types": ContentTypesSlide,
     "content-challenges": ContentChallengesSlide,
+    "pdf-inspector": PDFInspectorSlide,
     toolkit: ToolkitSlide,
     standards: StandardsSlide,
     "success-with-examples": SuccessWithExamplesSlide,
@@ -684,13 +708,13 @@ AI Rules
     const slide = slides[currentSlide];
     const SlideComponent = slideComponents[slide.type];
     const getAct = (slideIndex) => {
-      if (slideIndex < 9)
+      if (slideIndex < 10)
         return { num: 1, name: "The Challenge" };
-      if (slideIndex < 13)
+      if (slideIndex < 14)
         return { num: 2, name: "The Gap" };
-      if (slideIndex < 22)
+      if (slideIndex < 23)
         return { num: 3, name: "The Solution" };
-      if (slideIndex < 25)
+      if (slideIndex < 26)
         return { num: 4, name: "Practice" };
       return { num: 5, name: "Closing" };
     };
@@ -1110,6 +1134,104 @@ AI Rules
           color: var(--accent-green);
           font-weight: 700;
           font-size: 1.1rem;
+        }
+
+        /* PDF Inspector */
+        .pdf-inspector-slide {
+          text-align: center;
+        }
+
+        .pdf-inspector-subtitle {
+          font-size: 1.05rem;
+          color: var(--text-secondary);
+          margin-bottom: 32px;
+          max-width: 700px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .pdf-inspector-content {
+          display: flex;
+          gap: 50px;
+          align-items: flex-start;
+          justify-content: center;
+          margin-top: 24px;
+        }
+
+        .pdf-inspector-content .qr-code {
+          width: 250px;
+          height: 250px;
+        }
+
+        .tool-info {
+          text-align: left;
+          max-width: 450px;
+        }
+
+        .url-display-small {
+          background: #f0f7ff;
+          padding: 12px 16px;
+          border-radius: var(--radius-sm);
+          border-left: 3px solid var(--accent-blue);
+          margin-bottom: 20px;
+        }
+
+        .tool-url {
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: var(--accent-blue);
+          text-decoration: none;
+          word-break: break-all;
+          display: block;
+        }
+
+        .tool-url:hover {
+          text-decoration: underline;
+        }
+
+        .features-heading {
+          font-size: 1.1rem;
+          color: var(--text-primary);
+          margin-bottom: 12px;
+          font-weight: 600;
+        }
+
+        .tool-features {
+          list-style: none;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin-bottom: 20px;
+        }
+
+        .tool-features li {
+          padding: 10px 12px;
+          padding-left: 36px;
+          background: #f8f9fa;
+          border-radius: var(--radius-sm);
+          font-size: 0.9rem;
+          position: relative;
+          line-height: 1.4;
+        }
+
+        .tool-features li::before {
+          content: '\u2192';
+          position: absolute;
+          left: 12px;
+          color: var(--accent-blue);
+          font-weight: 700;
+          font-size: 1.1rem;
+        }
+
+        .call-to-action {
+          background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-blue) 100%);
+          color: white;
+          padding: 14px 20px;
+          border-radius: var(--radius-md);
+          font-weight: 600;
+          text-align: center;
+          font-size: 1rem;
         }
 
         /* Agenda */
@@ -2212,6 +2334,10 @@ AI Rules
           .qr-code { width: 250px; height: 250px; }
           .url-section { max-width: 100%; }
           .presentation-url { font-size: 1rem; }
+          .pdf-inspector-content { flex-direction: column; gap: 24px; align-items: center; }
+          .pdf-inspector-content .qr-code { width: 220px; height: 220px; }
+          .tool-info { max-width: 100%; }
+          .tool-url { font-size: 0.85rem; }
         }
       `), /* @__PURE__ */ React.createElement("a", { href: "#main-content", className: "skip-link" }, "Skip to content"), /* @__PURE__ */ React.createElement("header", { className: "header", role: "banner" }, /* @__PURE__ */ React.createElement("div", { className: "logo" }, /* @__PURE__ */ React.createElement("div", { className: "logo-mark", "aria-hidden": "true" }, "R"), /* @__PURE__ */ React.createElement("div", { className: "logo-text" }, /* @__PURE__ */ React.createElement("strong", null, "RUTGERS UNIVERSITY"), "Office of University Online Education Services")), /* @__PURE__ */ React.createElement("div", { className: "nav-controls" }, /* @__PURE__ */ React.createElement("span", { className: "act-indicator" }, "Part ", currentAct.num, ": ", currentAct.name), /* @__PURE__ */ React.createElement("span", { className: "slide-counter", "aria-live": "polite" }, currentSlide + 1, " / ", totalSlides), /* @__PURE__ */ React.createElement(
       "button",
@@ -2229,7 +2355,7 @@ AI Rules
         "aria-label": "Close slide menu"
       },
       "\u2715"
-    )), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 1: The Challenge"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(0, 9).map((s, i) => /* @__PURE__ */ React.createElement(
+    )), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 1: The Challenge"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(0, 10).map((s, i) => /* @__PURE__ */ React.createElement(
       "button",
       {
         key: s.id,
@@ -2239,45 +2365,45 @@ AI Rules
       },
       /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 1, "."),
       /* @__PURE__ */ React.createElement("span", null, s.title)
-    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 2: The Gap"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(9, 13).map((s, i) => /* @__PURE__ */ React.createElement(
+    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 2: The Gap"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(10, 14).map((s, i) => /* @__PURE__ */ React.createElement(
       "button",
       {
         key: s.id,
-        className: `slide-menu-item ${i + 9 === currentSlide ? "active" : ""}`,
-        onClick: () => goToSlide(i + 9),
-        "aria-current": i + 9 === currentSlide ? "page" : void 0
+        className: `slide-menu-item ${i + 10 === currentSlide ? "active" : ""}`,
+        onClick: () => goToSlide(i + 10),
+        "aria-current": i + 10 === currentSlide ? "page" : void 0
       },
-      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 10, "."),
+      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 11, "."),
       /* @__PURE__ */ React.createElement("span", null, s.title)
-    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 3: The Solution"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(13, 22).map((s, i) => /* @__PURE__ */ React.createElement(
+    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 3: The Solution"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(14, 23).map((s, i) => /* @__PURE__ */ React.createElement(
       "button",
       {
         key: s.id,
-        className: `slide-menu-item ${i + 13 === currentSlide ? "active" : ""}`,
-        onClick: () => goToSlide(i + 13),
-        "aria-current": i + 13 === currentSlide ? "page" : void 0
+        className: `slide-menu-item ${i + 14 === currentSlide ? "active" : ""}`,
+        onClick: () => goToSlide(i + 14),
+        "aria-current": i + 14 === currentSlide ? "page" : void 0
       },
-      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 14, "."),
+      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 15, "."),
       /* @__PURE__ */ React.createElement("span", null, s.title)
-    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 4: Practice"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(22, 25).map((s, i) => /* @__PURE__ */ React.createElement(
+    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 4: Practice"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(23, 26).map((s, i) => /* @__PURE__ */ React.createElement(
       "button",
       {
         key: s.id,
-        className: `slide-menu-item ${i + 22 === currentSlide ? "active" : ""}`,
-        onClick: () => goToSlide(i + 22),
-        "aria-current": i + 22 === currentSlide ? "page" : void 0
+        className: `slide-menu-item ${i + 23 === currentSlide ? "active" : ""}`,
+        onClick: () => goToSlide(i + 23),
+        "aria-current": i + 23 === currentSlide ? "page" : void 0
       },
-      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 23, "."),
+      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 24, "."),
       /* @__PURE__ */ React.createElement("span", null, s.title)
-    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Closing"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(25).map((s, i) => /* @__PURE__ */ React.createElement(
+    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Closing"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(26).map((s, i) => /* @__PURE__ */ React.createElement(
       "button",
       {
         key: s.id,
-        className: `slide-menu-item ${i + 25 === currentSlide ? "active" : ""}`,
-        onClick: () => goToSlide(i + 25),
-        "aria-current": i + 25 === currentSlide ? "page" : void 0
+        className: `slide-menu-item ${i + 26 === currentSlide ? "active" : ""}`,
+        onClick: () => goToSlide(i + 26),
+        "aria-current": i + 26 === currentSlide ? "page" : void 0
       },
-      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 26, "."),
+      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 27, "."),
       /* @__PURE__ */ React.createElement("span", null, s.title)
     )))))));
   }
