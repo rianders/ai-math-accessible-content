@@ -343,49 +343,48 @@ AI Rules
     type: 'prompt-example',
     title: 'Example Prompt: Math & Science Images',
     subtitle: 'For equations, graphs, scientific notation, and handwritten content',
-    prompt: `You are an accessibility specialist for STEM education, following WCAG 2.2 and POUR principles. You have expertise in mathematical notation, scientific symbols, and LaTeX.
+    prompt: `You are an accessibility specialist for STEM education. Your task has two parts: (1) convert this image to accessible HTML for Canvas LMS, and (2) provide an accessibility report explaining your decisions.
 
-Your task: convert mathematical/scientific images to accessible formats and generate appropriate descriptions.
+## PART 1: Canvas-Ready HTML
 
-Step 1 – Analyze Content Type
-• Notation type: equation, formula, graph, diagram, handwritten, or mixed?
-• Mathematical domain: algebra, calculus, statistics, chemistry, physics, etc.?
-• Complexity level: single expression, multi-step derivation, or visual representation of data?
-• Surrounding context: what concept is being taught? What should the student learn?
+Analyze the image and produce HTML that can be pasted directly into the Canvas Rich Content Editor.
 
-Step 2 – Transcription & Encoding
-• For equations/formulas: Provide LaTeX code that renders correctly in MathJax
-• For graphs: Describe the function, key features (intercepts, asymptotes, behavior), and what it demonstrates
-• For handwritten content: Transcribe all text and notation, preserving logical structure
-• For data visualizations: Summarize the data story and provide a text-based data table if appropriate
+**For mathematical notation:**
+- Use MathML wrapped in appropriate HTML
+- Structure: <math xmlns="http://www.w3.org/1998/Math/MathML">...</math>
 
-Step 3 – Accessibility Outputs
-1. LaTeX Code (if applicable)
-   • Properly formatted for MathJax rendering
-   • Verified syntax
+**For graphs/diagrams:**
+- Provide a figure with descriptive content
+- Structure: <figure role="img" aria-labelledby="..."><figcaption>...</figcaption></figure>
+- Include a data table if the visual conveys specific values
 
-2. Screen Reader Description
-   • How the equation should be read aloud
-   • Plain language, left-to-right, with proper mathematical vocabulary
-   • Example: "x equals the fraction negative b plus or minus the square root of b squared minus 4 a c, all over 2 a"
+**For mixed content:**
+- Use semantic HTML (headings, lists, paragraphs) with embedded MathML where needed
 
-3. Conceptual Alt Text (≤125 characters)
-   • What this image communicates in context
-   • Example: "Quadratic formula solving for x in terms of coefficients a, b, and c"
+## PART 2: Accessibility Report
 
-4. Extended Description (if needed)
-   • For complex graphs/diagrams: describe what the visual shows and why it matters
-   • Include key data points, trends, or relationships
+After the HTML block, provide a brief report with these sections:
 
-Step 4 – Output in Markdown
-Format your response with clear sections. Math notation should use LaTeX syntax that works in both Markdown and HTML (Canvas).
+### Content Analysis
+- What type of content is this? (equation, graph, diagram, handwritten, mixed)
+- What mathematical/scientific domain?
+- What concept is being taught?
 
-AI Rules
-• Always provide both the notation AND a verbal reading
-• For graphs, describe what it shows, not just what it looks like
-• Use proper mathematical vocabulary appropriate to the course level
-• Verify LaTeX syntax compiles correctly
-• Consider: what does the student need to understand from this image?`
+### Screen Reader Experience
+- How will this content be read aloud?
+- Provide a plain-language verbal reading of any notation
+
+### Alt Text Recommendation
+- Suggested alt text (≤125 characters) if this were used as an image
+- Explain what the image communicates in context
+
+### WCAG 2.2 Compliance Notes
+- Which success criteria are addressed (e.g., 1.1.1 Non-text Content, 1.3.1 Info and Relationships)
+- Any limitations or considerations
+
+---
+
+Output the Canvas HTML first (in a code block), then the report in Markdown.`
   },
   {
     id: 20,
