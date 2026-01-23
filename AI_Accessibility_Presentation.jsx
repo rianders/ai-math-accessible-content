@@ -307,6 +307,23 @@ const slides = [
   },
   {
     id: 18,
+    type: 'ocr-demo',
+    title: 'DeepSeek OCR Demo',
+    subtitle: 'State-of-the-art OCR for extracting text and graphs from PDFs',
+    url: 'https://huggingface.co/spaces/merterbak/DeepSeek-OCR-Demo',
+    shortUrl: 'huggingface.co/spaces/merterbak/DeepSeek-OCR-Demo',
+    status: 'Demo Tool',
+    features: [
+      'Advanced OCR for handwritten content',
+      'Extract graphs and diagrams from PDFs',
+      'Transcribe complex mathematical notation',
+      'Handles multi-column layouts and scanned documents'
+    ],
+    callToAction: 'Try it with your challenging PDFs!',
+    note: 'Currently a demo - great for testing difficult content extraction'
+  },
+  {
+    id: 20,
     type: 'prompt-example',
     title: 'Example Prompt: General Images',
     subtitle: 'For photographs, diagrams, icons, and standard visuals',
@@ -339,7 +356,7 @@ AI Rules
 • Prioritize the most relevant interpretation for the learner.`
   },
   {
-    id: 19,
+    id: 20,
     type: 'prompt-example',
     title: 'Example Prompt: Math & Science Images',
     subtitle: 'For equations, graphs, scientific notation, and handwritten content',
@@ -387,7 +404,7 @@ After the HTML block, provide a brief report with these sections:
 Output the Canvas HTML first (in a code block), then the report in Markdown.`
   },
   {
-    id: 20,
+    id: 21,
     type: 'setup',
     title: 'Setting Up Your AI Workflow',
     subtitle: 'Save time with reusable configurations',
@@ -410,7 +427,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     ]
   },
   {
-    id: 21,
+    id: 22,
     type: 'demo',
     title: 'Demo: Math Notation → Accessible Text',
     description: 'Converting an equation image to accessible format',
@@ -428,7 +445,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     }
   },
   {
-    id: 22,
+    id: 23,
     type: 'demo',
     title: 'Demo: Handwritten Notes → Digital Text',
     description: 'Converting lecture whiteboard captures',
@@ -447,7 +464,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     ]
   },
   {
-    id: 23,
+    id: 24,
     type: 'workflow',
     title: 'The Complete Accessible Workflow',
     subtitle: 'Combining built-in tools with AI assistance',
@@ -468,7 +485,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
 
   // ACT 4: PRACTICE & APPLICATION
   {
-    id: 24,
+    id: 25,
     type: 'activity',
     title: 'Hands-On Activity',
     subtitle: 'Try it with challenging content',
@@ -482,7 +499,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     timeboxed: '15 minutes'
   },
   {
-    id: 25,
+    id: 26,
     type: 'discussion',
     title: 'Debrief: Comparing Results',
     questions: [
@@ -494,7 +511,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     insight: 'AI tools are powerful assistants, but human expertise remains essential for verification.'
   },
   {
-    id: 26,
+    id: 27,
     type: 'student',
     title: 'The Student Perspective',
     subtitle: 'Empowering students to help themselves',
@@ -517,7 +534,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
 
   // CLOSING
   {
-    id: 27,
+    id: 28,
     type: 'takeaways',
     title: 'Key Takeaways',
     items: [
@@ -530,10 +547,12 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     ]
   },
   {
-    id: 28,
+    id: 29,
     type: 'resources',
     title: 'Resources',
     resources: [
+      { name: 'AI Resources at Rutgers', type: 'Resources', url: 'https://it.rutgers.edu/ai/' },
+      { name: 'Course Accessibility Resources', type: 'Resources', url: 'https://academicaffairs.rutgers.edu/course-accessibility-resources' },
       { name: 'Making Learning Accessible for All: Meeting ADA Title II Standards', type: 'Policy' },
       { name: 'Rutgers University Digital Accessibility Policy', type: 'Policy' },
       { name: 'Workshop Prompt Templates', type: 'Toolkit' },
@@ -542,7 +561,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     question: 'What other challenging content types should we address in future workshops?'
   },
   {
-    id: 29,
+    id: 30,
     type: 'upcoming-workshops',
     title: 'Continue Learning',
     categories: [
@@ -572,7 +591,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     ]
   },
   {
-    id: 30,
+    id: 31,
     type: 'closing',
     title: 'Thank You!',
     contacts: [
@@ -657,6 +676,45 @@ const PDFInspectorSlide = ({ data }) => (
         <div className="call-to-action">
           {data.callToAction}
         </div>
+      </div>
+    </div>
+  </div>
+);
+
+const OCRDemoSlide = ({ data }) => (
+  <div className="slide-content ocr-demo-slide">
+    <h2>{data.title}</h2>
+    {data.status && <span className="demo-badge">{data.status}</span>}
+    <p className="ocr-demo-subtitle">{data.subtitle}</p>
+    <div className="ocr-demo-content">
+      <div className="qr-section">
+        <div className="qr-code-container">
+          <img
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(data.url)}`}
+            alt={`QR code linking to ${data.url}`}
+            className="qr-code"
+          />
+        </div>
+        <p className="qr-label">Scan to try it now</p>
+      </div>
+      <div className="tool-info">
+        <div className="url-display-small">
+          <a href={data.url} target="_blank" rel="noopener noreferrer" className="tool-url">
+            {data.shortUrl}
+          </a>
+        </div>
+        <h3 className="features-heading">Key Features:</h3>
+        <ul className="tool-features" role="list">
+          {data.features.map((feature, i) => (
+            <li key={i}>{feature}</li>
+          ))}
+        </ul>
+        <div className="call-to-action">
+          {data.callToAction}
+        </div>
+        {data.note && (
+          <p className="tool-note">{data.note}</p>
+        )}
       </div>
     </div>
   </div>
@@ -1133,7 +1191,13 @@ const ResourcesSlide = ({ data }) => (
     <ul className="resources-list" role="list">
       {data.resources.map((r, i) => (
         <li key={i}>
-          <span className="resource-name">{r.name}</span>
+          {r.url ? (
+            <a href={r.url} target="_blank" rel="noopener noreferrer" className="resource-name resource-link">
+              {r.name}
+            </a>
+          ) : (
+            <span className="resource-name">{r.name}</span>
+          )}
           <span className="resource-type">{r.type}</span>
         </li>
       ))}
@@ -1205,6 +1269,7 @@ const slideComponents = {
   'content-types': ContentTypesSlide,
   'content-challenges': ContentChallengesSlide,
   'pdf-inspector': PDFInspectorSlide,
+  'ocr-demo': OCRDemoSlide,
   toolkit: ToolkitSlide,
   standards: StandardsSlide,
   'success-with-examples': SuccessWithExamplesSlide,
@@ -1274,8 +1339,8 @@ export default function Presentation() {
   const getAct = (slideIndex) => {
     if (slideIndex < 10) return { num: 1, name: 'The Challenge' };
     if (slideIndex < 14) return { num: 2, name: 'The Gap' };
-    if (slideIndex < 23) return { num: 3, name: 'The Solution' };
-    if (slideIndex < 26) return { num: 4, name: 'Practice' };
+    if (slideIndex < 24) return { num: 3, name: 'The Solution' };
+    if (slideIndex < 27) return { num: 4, name: 'Practice' };
     return { num: 5, name: 'Closing' };
   };
   
@@ -1796,6 +1861,56 @@ export default function Presentation() {
           font-weight: 600;
           text-align: center;
           font-size: 1rem;
+        }
+
+        /* OCR Demo */
+        .ocr-demo-slide {
+          text-align: center;
+        }
+
+        .demo-badge {
+          display: inline-block;
+          background: var(--accent-orange);
+          color: white;
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          margin-left: 12px;
+          vertical-align: middle;
+        }
+
+        .ocr-demo-subtitle {
+          font-size: 1.05rem;
+          color: var(--text-secondary);
+          margin-bottom: 32px;
+          max-width: 700px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .ocr-demo-content {
+          display: flex;
+          gap: 50px;
+          align-items: flex-start;
+          justify-content: center;
+          margin-top: 24px;
+        }
+
+        .ocr-demo-content .qr-code {
+          width: 250px;
+          height: 250px;
+        }
+
+        .tool-note {
+          margin-top: 16px;
+          padding: 12px;
+          background: #FFF8E1;
+          border-left: 3px solid var(--accent-orange);
+          border-radius: var(--radius-sm);
+          font-size: 0.85rem;
+          font-style: italic;
+          color: var(--text-secondary);
         }
 
         /* Agenda */
@@ -2629,6 +2744,17 @@ export default function Presentation() {
         }
         
         .resource-name { font-weight: 500; font-size: 0.95rem; }
+
+        .resource-link {
+          color: var(--accent-blue);
+          text-decoration: none;
+          transition: var(--transition);
+        }
+
+        .resource-link:hover {
+          text-decoration: underline;
+        }
+
         .resource-type {
           font-size: 0.75rem;
           color: var(--text-secondary);
@@ -2911,6 +3037,8 @@ export default function Presentation() {
           .presentation-url { font-size: 1rem; }
           .pdf-inspector-content { flex-direction: column; gap: 24px; align-items: center; }
           .pdf-inspector-content .qr-code { width: 220px; height: 220px; }
+          .ocr-demo-content { flex-direction: column; gap: 24px; align-items: center; }
+          .ocr-demo-content .qr-code { width: 220px; height: 220px; }
           .tool-info { max-width: 100%; }
           .tool-url { font-size: 0.85rem; }
         }
@@ -3020,7 +3148,7 @@ export default function Presentation() {
             <div className="slide-menu-section">
               <div className="section-label">Part 3: The Solution</div>
               <div className="slide-menu-list">
-                {slides.slice(14, 23).map((s, i) => (
+                {slides.slice(14, 24).map((s, i) => (
                   <button
                     key={s.id}
                     className={`slide-menu-item ${i + 14 === currentSlide ? 'active' : ''}`}
@@ -3037,14 +3165,14 @@ export default function Presentation() {
             <div className="slide-menu-section">
               <div className="section-label">Part 4: Practice</div>
               <div className="slide-menu-list">
-                {slides.slice(23, 26).map((s, i) => (
+                {slides.slice(24, 27).map((s, i) => (
                   <button
                     key={s.id}
-                    className={`slide-menu-item ${i + 23 === currentSlide ? 'active' : ''}`}
-                    onClick={() => goToSlide(i + 23)}
-                    aria-current={i + 23 === currentSlide ? 'page' : undefined}
+                    className={`slide-menu-item ${i + 24 === currentSlide ? 'active' : ''}`}
+                    onClick={() => goToSlide(i + 24)}
+                    aria-current={i + 24 === currentSlide ? 'page' : undefined}
                   >
-                    <span className="slide-num">{i + 24}.</span>
+                    <span className="slide-num">{i + 25}.</span>
                     <span>{s.title}</span>
                   </button>
                 ))}
@@ -3054,14 +3182,14 @@ export default function Presentation() {
             <div className="slide-menu-section">
               <div className="section-label">Closing</div>
               <div className="slide-menu-list">
-                {slides.slice(26).map((s, i) => (
+                {slides.slice(27).map((s, i) => (
                   <button
                     key={s.id}
-                    className={`slide-menu-item ${i + 26 === currentSlide ? 'active' : ''}`}
-                    onClick={() => goToSlide(i + 26)}
-                    aria-current={i + 26 === currentSlide ? 'page' : undefined}
+                    className={`slide-menu-item ${i + 27 === currentSlide ? 'active' : ''}`}
+                    onClick={() => goToSlide(i + 27)}
+                    aria-current={i + 27 === currentSlide ? 'page' : undefined}
                   >
-                    <span className="slide-num">{i + 27}.</span>
+                    <span className="slide-num">{i + 28}.</span>
                     <span>{s.title}</span>
                   </button>
                 ))}

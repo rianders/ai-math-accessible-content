@@ -328,6 +328,23 @@ var PresentationModule = (() => {
     },
     {
       id: 18,
+      type: "ocr-demo",
+      title: "DeepSeek OCR Demo",
+      subtitle: "State-of-the-art OCR for extracting text and graphs from PDFs",
+      url: "https://huggingface.co/spaces/merterbak/DeepSeek-OCR-Demo",
+      shortUrl: "huggingface.co/spaces/merterbak/DeepSeek-OCR-Demo",
+      status: "Demo Tool",
+      features: [
+        "Advanced OCR for handwritten content",
+        "Extract graphs and diagrams from PDFs",
+        "Transcribe complex mathematical notation",
+        "Handles multi-column layouts and scanned documents"
+      ],
+      callToAction: "Try it with your challenging PDFs!",
+      note: "Currently a demo - great for testing difficult content extraction"
+    },
+    {
+      id: 20,
       type: "prompt-example",
       title: "Example Prompt: General Images",
       subtitle: "For photographs, diagrams, icons, and standard visuals",
@@ -360,7 +377,7 @@ AI Rules
 \u2022 Prioritize the most relevant interpretation for the learner.`
     },
     {
-      id: 19,
+      id: 20,
       type: "prompt-example",
       title: "Example Prompt: Math & Science Images",
       subtitle: "For equations, graphs, scientific notation, and handwritten content",
@@ -408,7 +425,7 @@ After the HTML block, provide a brief report with these sections:
 Output the Canvas HTML first (in a code block), then the report in Markdown.`
     },
     {
-      id: 20,
+      id: 21,
       type: "setup",
       title: "Setting Up Your AI Workflow",
       subtitle: "Save time with reusable configurations",
@@ -431,7 +448,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       ]
     },
     {
-      id: 21,
+      id: 22,
       type: "demo",
       title: "Demo: Math Notation \u2192 Accessible Text",
       description: "Converting an equation image to accessible format",
@@ -449,7 +466,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       }
     },
     {
-      id: 22,
+      id: 23,
       type: "demo",
       title: "Demo: Handwritten Notes \u2192 Digital Text",
       description: "Converting lecture whiteboard captures",
@@ -468,7 +485,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       ]
     },
     {
-      id: 23,
+      id: 24,
       type: "workflow",
       title: "The Complete Accessible Workflow",
       subtitle: "Combining built-in tools with AI assistance",
@@ -488,7 +505,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     },
     // ACT 4: PRACTICE & APPLICATION
     {
-      id: 24,
+      id: 25,
       type: "activity",
       title: "Hands-On Activity",
       subtitle: "Try it with challenging content",
@@ -502,7 +519,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       timeboxed: "15 minutes"
     },
     {
-      id: 25,
+      id: 26,
       type: "discussion",
       title: "Debrief: Comparing Results",
       questions: [
@@ -514,7 +531,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       insight: "AI tools are powerful assistants, but human expertise remains essential for verification."
     },
     {
-      id: 26,
+      id: 27,
       type: "student",
       title: "The Student Perspective",
       subtitle: "Empowering students to help themselves",
@@ -536,7 +553,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     },
     // CLOSING
     {
-      id: 27,
+      id: 28,
       type: "takeaways",
       title: "Key Takeaways",
       items: [
@@ -549,10 +566,12 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       ]
     },
     {
-      id: 28,
+      id: 29,
       type: "resources",
       title: "Resources",
       resources: [
+        { name: "AI Resources at Rutgers", type: "Resources", url: "https://it.rutgers.edu/ai/" },
+        { name: "Course Accessibility Resources", type: "Resources", url: "https://academicaffairs.rutgers.edu/course-accessibility-resources" },
         { name: "Making Learning Accessible for All: Meeting ADA Title II Standards", type: "Policy" },
         { name: "Rutgers University Digital Accessibility Policy", type: "Policy" },
         { name: "Workshop Prompt Templates", type: "Toolkit" },
@@ -561,7 +580,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       question: "What other challenging content types should we address in future workshops?"
     },
     {
-      id: 29,
+      id: 30,
       type: "upcoming-workshops",
       title: "Continue Learning",
       categories: [
@@ -591,7 +610,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       ]
     },
     {
-      id: 30,
+      id: 31,
       type: "closing",
       title: "Thank You!",
       contacts: [
@@ -618,6 +637,14 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       className: "qr-code"
     }
   )), /* @__PURE__ */ React.createElement("p", { className: "qr-label" }, "Scan to try it now")), /* @__PURE__ */ React.createElement("div", { className: "tool-info" }, /* @__PURE__ */ React.createElement("div", { className: "url-display-small" }, /* @__PURE__ */ React.createElement("a", { href: data.url, target: "_blank", rel: "noopener noreferrer", className: "tool-url" }, data.shortUrl)), /* @__PURE__ */ React.createElement("h3", { className: "features-heading" }, "Key Features:"), /* @__PURE__ */ React.createElement("ul", { className: "tool-features", role: "list" }, data.features.map((feature, i) => /* @__PURE__ */ React.createElement("li", { key: i }, feature))), /* @__PURE__ */ React.createElement("div", { className: "call-to-action" }, data.callToAction))));
+  var OCRDemoSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content ocr-demo-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), data.status && /* @__PURE__ */ React.createElement("span", { className: "demo-badge" }, data.status), /* @__PURE__ */ React.createElement("p", { className: "ocr-demo-subtitle" }, data.subtitle), /* @__PURE__ */ React.createElement("div", { className: "ocr-demo-content" }, /* @__PURE__ */ React.createElement("div", { className: "qr-section" }, /* @__PURE__ */ React.createElement("div", { className: "qr-code-container" }, /* @__PURE__ */ React.createElement(
+    "img",
+    {
+      src: `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(data.url)}`,
+      alt: `QR code linking to ${data.url}`,
+      className: "qr-code"
+    }
+  )), /* @__PURE__ */ React.createElement("p", { className: "qr-label" }, "Scan to try it now")), /* @__PURE__ */ React.createElement("div", { className: "tool-info" }, /* @__PURE__ */ React.createElement("div", { className: "url-display-small" }, /* @__PURE__ */ React.createElement("a", { href: data.url, target: "_blank", rel: "noopener noreferrer", className: "tool-url" }, data.shortUrl)), /* @__PURE__ */ React.createElement("h3", { className: "features-heading" }, "Key Features:"), /* @__PURE__ */ React.createElement("ul", { className: "tool-features", role: "list" }, data.features.map((feature, i) => /* @__PURE__ */ React.createElement("li", { key: i }, feature))), /* @__PURE__ */ React.createElement("div", { className: "call-to-action" }, data.callToAction), data.note && /* @__PURE__ */ React.createElement("p", { className: "tool-note" }, data.note))));
   var AgendaSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content agenda-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("p", { className: "duration-badge" }, "Duration: ", data.duration), /* @__PURE__ */ React.createElement("div", { className: "agenda-items" }, data.sections.map((section, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "agenda-item" }, /* @__PURE__ */ React.createElement("div", { className: "agenda-num" }, i + 1), /* @__PURE__ */ React.createElement("div", { className: "agenda-content" }, /* @__PURE__ */ React.createElement("h3", null, section.name), /* @__PURE__ */ React.createElement("p", null, section.desc)), /* @__PURE__ */ React.createElement("div", { className: "agenda-time" }, section.time)))));
   var ObjectivesSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("p", { className: "objectives-subtitle" }, data.subtitle), /* @__PURE__ */ React.createElement("ul", { className: "objectives-list", role: "list" }, data.items.map((item, i) => /* @__PURE__ */ React.createElement("li", { key: i }, /* @__PURE__ */ React.createElement("span", { className: "verb" }, item.verb), /* @__PURE__ */ React.createElement("span", null, item.text)))));
   var AlertSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content alert-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("div", { className: "alert-box", role: "alert" }, /* @__PURE__ */ React.createElement("h3", null, data.headline), /* @__PURE__ */ React.createElement("p", { className: "deadline" }, data.deadline)), /* @__PURE__ */ React.createElement("p", { className: "question" }, data.question));
@@ -641,7 +668,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
   var DiscussionSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content discussion-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("ul", { className: "discussion-questions", role: "list" }, data.questions.map((q, i) => /* @__PURE__ */ React.createElement("li", { key: i }, q))), data.insight && /* @__PURE__ */ React.createElement("p", { className: "insight" }, data.insight));
   var StudentSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content student-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("p", { className: "student-subtitle" }, data.subtitle), /* @__PURE__ */ React.createElement("div", { className: "student-examples" }, data.points.map((point, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "student-example" }, /* @__PURE__ */ React.createElement("p", { className: "student-prompt" }, '"', point.prompt, '"'), /* @__PURE__ */ React.createElement("p", { className: "student-use" }, point.use)))), data.note && /* @__PURE__ */ React.createElement("p", { className: "slide-note" }, data.note));
   var TakeawaysSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content takeaways-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("div", { className: "takeaways-list" }, data.items.map((item, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "takeaway-item" }, /* @__PURE__ */ React.createElement("h3", null, item.point), /* @__PURE__ */ React.createElement("p", null, item.detail)))));
-  var ResourcesSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("ul", { className: "resources-list", role: "list" }, data.resources.map((r, i) => /* @__PURE__ */ React.createElement("li", { key: i }, /* @__PURE__ */ React.createElement("span", { className: "resource-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "resource-type" }, r.type)))), /* @__PURE__ */ React.createElement("p", { className: "closing-question" }, data.question));
+  var ResourcesSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("ul", { className: "resources-list", role: "list" }, data.resources.map((r, i) => /* @__PURE__ */ React.createElement("li", { key: i }, r.url ? /* @__PURE__ */ React.createElement("a", { href: r.url, target: "_blank", rel: "noopener noreferrer", className: "resource-name resource-link" }, r.name) : /* @__PURE__ */ React.createElement("span", { className: "resource-name" }, r.name), /* @__PURE__ */ React.createElement("span", { className: "resource-type" }, r.type)))), /* @__PURE__ */ React.createElement("p", { className: "closing-question" }, data.question));
   var UpcomingWorkshopsSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content upcoming-workshops-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("div", { className: "workshop-categories" }, data.categories.map((cat, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "workshop-category" }, /* @__PURE__ */ React.createElement("h3", null, cat.heading), /* @__PURE__ */ React.createElement("p", { className: "org-name" }, cat.org), cat.sessions ? /* @__PURE__ */ React.createElement("div", { className: "session-list" }, cat.sessions.map((session, j) => /* @__PURE__ */ React.createElement("div", { key: j, className: "session-item" }, session.link ? /* @__PURE__ */ React.createElement("a", { href: session.link, target: "_blank", rel: "noopener noreferrer", className: "session-name session-link" }, session.name) : /* @__PURE__ */ React.createElement("span", { className: "session-name" }, session.name), /* @__PURE__ */ React.createElement("span", { className: "session-date" }, session.date)))) : cat.placeholder ? /* @__PURE__ */ React.createElement("div", { className: "placeholder-box small" }, /* @__PURE__ */ React.createElement("div", { className: "placeholder-header" }, "\u{1F4C5} ", cat.placeholder.instruction), /* @__PURE__ */ React.createElement("ul", { className: "placeholder-suggestions" }, cat.placeholder.suggestions.map((s, j) => /* @__PURE__ */ React.createElement("li", { key: j }, s)))) : null))));
   var ClosingSlide = ({ data }) => /* @__PURE__ */ React.createElement("div", { className: "slide-content closing-slide" }, /* @__PURE__ */ React.createElement("h2", null, data.title), /* @__PURE__ */ React.createElement("div", { className: "contacts" }, data.contacts.map((c, i) => /* @__PURE__ */ React.createElement("div", { key: i, className: "contact" }, /* @__PURE__ */ React.createElement("span", { className: "contact-name" }, c.name), /* @__PURE__ */ React.createElement("a", { href: `mailto:${c.email}`, className: "contact-email" }, c.email)))), /* @__PURE__ */ React.createElement("p", { className: "closing-org" }, data.org));
   var slideComponents = {
@@ -653,6 +680,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     "content-types": ContentTypesSlide,
     "content-challenges": ContentChallengesSlide,
     "pdf-inspector": PDFInspectorSlide,
+    "ocr-demo": OCRDemoSlide,
     toolkit: ToolkitSlide,
     standards: StandardsSlide,
     "success-with-examples": SuccessWithExamplesSlide,
@@ -715,9 +743,9 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
         return { num: 1, name: "The Challenge" };
       if (slideIndex < 14)
         return { num: 2, name: "The Gap" };
-      if (slideIndex < 23)
+      if (slideIndex < 24)
         return { num: 3, name: "The Solution" };
-      if (slideIndex < 26)
+      if (slideIndex < 27)
         return { num: 4, name: "Practice" };
       return { num: 5, name: "Closing" };
     };
@@ -1235,6 +1263,56 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
           font-weight: 600;
           text-align: center;
           font-size: 1rem;
+        }
+
+        /* OCR Demo */
+        .ocr-demo-slide {
+          text-align: center;
+        }
+
+        .demo-badge {
+          display: inline-block;
+          background: var(--accent-orange);
+          color: white;
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          margin-left: 12px;
+          vertical-align: middle;
+        }
+
+        .ocr-demo-subtitle {
+          font-size: 1.05rem;
+          color: var(--text-secondary);
+          margin-bottom: 32px;
+          max-width: 700px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .ocr-demo-content {
+          display: flex;
+          gap: 50px;
+          align-items: flex-start;
+          justify-content: center;
+          margin-top: 24px;
+        }
+
+        .ocr-demo-content .qr-code {
+          width: 250px;
+          height: 250px;
+        }
+
+        .tool-note {
+          margin-top: 16px;
+          padding: 12px;
+          background: #FFF8E1;
+          border-left: 3px solid var(--accent-orange);
+          border-radius: var(--radius-sm);
+          font-size: 0.85rem;
+          font-style: italic;
+          color: var(--text-secondary);
         }
 
         /* Agenda */
@@ -2068,6 +2146,17 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
         }
         
         .resource-name { font-weight: 500; font-size: 0.95rem; }
+
+        .resource-link {
+          color: var(--accent-blue);
+          text-decoration: none;
+          transition: var(--transition);
+        }
+
+        .resource-link:hover {
+          text-decoration: underline;
+        }
+
         .resource-type {
           font-size: 0.75rem;
           color: var(--text-secondary);
@@ -2350,6 +2439,8 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
           .presentation-url { font-size: 1rem; }
           .pdf-inspector-content { flex-direction: column; gap: 24px; align-items: center; }
           .pdf-inspector-content .qr-code { width: 220px; height: 220px; }
+          .ocr-demo-content { flex-direction: column; gap: 24px; align-items: center; }
+          .ocr-demo-content .qr-code { width: 220px; height: 220px; }
           .tool-info { max-width: 100%; }
           .tool-url { font-size: 0.85rem; }
         }
@@ -2389,7 +2480,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       },
       /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 11, "."),
       /* @__PURE__ */ React.createElement("span", null, s.title)
-    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 3: The Solution"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(14, 23).map((s, i) => /* @__PURE__ */ React.createElement(
+    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 3: The Solution"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(14, 24).map((s, i) => /* @__PURE__ */ React.createElement(
       "button",
       {
         key: s.id,
@@ -2399,25 +2490,25 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
       },
       /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 15, "."),
       /* @__PURE__ */ React.createElement("span", null, s.title)
-    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 4: Practice"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(23, 26).map((s, i) => /* @__PURE__ */ React.createElement(
+    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Part 4: Practice"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(24, 27).map((s, i) => /* @__PURE__ */ React.createElement(
       "button",
       {
         key: s.id,
-        className: `slide-menu-item ${i + 23 === currentSlide ? "active" : ""}`,
-        onClick: () => goToSlide(i + 23),
-        "aria-current": i + 23 === currentSlide ? "page" : void 0
+        className: `slide-menu-item ${i + 24 === currentSlide ? "active" : ""}`,
+        onClick: () => goToSlide(i + 24),
+        "aria-current": i + 24 === currentSlide ? "page" : void 0
       },
-      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 24, "."),
+      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 25, "."),
       /* @__PURE__ */ React.createElement("span", null, s.title)
-    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Closing"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(26).map((s, i) => /* @__PURE__ */ React.createElement(
+    )))), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-section" }, /* @__PURE__ */ React.createElement("div", { className: "section-label" }, "Closing"), /* @__PURE__ */ React.createElement("div", { className: "slide-menu-list" }, slides.slice(27).map((s, i) => /* @__PURE__ */ React.createElement(
       "button",
       {
         key: s.id,
-        className: `slide-menu-item ${i + 26 === currentSlide ? "active" : ""}`,
-        onClick: () => goToSlide(i + 26),
-        "aria-current": i + 26 === currentSlide ? "page" : void 0
+        className: `slide-menu-item ${i + 27 === currentSlide ? "active" : ""}`,
+        onClick: () => goToSlide(i + 27),
+        "aria-current": i + 27 === currentSlide ? "page" : void 0
       },
-      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 27, "."),
+      /* @__PURE__ */ React.createElement("span", { className: "slide-num" }, i + 28, "."),
       /* @__PURE__ */ React.createElement("span", null, s.title)
     )))))));
   }
