@@ -159,16 +159,7 @@ var PresentationModule = (() => {
         { icon: "\u2713", text: "Basic charts with clear labels" },
         { icon: "\u2713", text: "Decorative images (mark as decorative)" }
       ],
-      conclusion: "For typical course content, these tools get you 80% of the way there.",
-      placeholder: {
-        type: "screenshots",
-        instruction: "ADD SCREENSHOTS: ALLY success examples in Canvas",
-        suggestions: [
-          "ALLY accessibility score indicator (green) on a standard image",
-          "ALLY auto-generated alt text for a photograph",
-          "PowerPoint accessibility checker passing"
-        ]
-      }
+      conclusion: "For typical course content, these tools get you 80% of the way there."
     },
     // ACT 2: THE GAP
     {
@@ -184,16 +175,7 @@ var PresentationModule = (() => {
         { icon: "\u2717", text: "Complex graphs and data visualizations", example: "Research figures, technical diagrams" },
         { icon: "\u2717", text: "Videos containing notation", example: "Recorded lectures with equations" }
       ],
-      conclusion: "These are where screen readers and auto-generators struggle\u2014or fail completely.",
-      placeholder: {
-        type: "screenshots",
-        instruction: "ADD SCREENSHOTS: ALLY failure examples",
-        suggestions: [
-          "ALLY accessibility score (red/orange) on a math equation image",
-          "ALLY's inadequate auto-generated text for handwritten notes",
-          `ALLY's description of a graph showing "image of a chart"`
-        ]
-      }
+      conclusion: "These are where screen readers and auto-generators struggle\u2014or fail completely."
     },
     {
       id: 12,
@@ -217,17 +199,7 @@ var PresentationModule = (() => {
           problem: "Context dependency",
           detail: "The same symbol means different things in different fields"
         }
-      ],
-      placeholder: {
-        type: "images",
-        instruction: "ADD EXAMPLE IMAGES: Real math/science content",
-        suggestions: [
-          "Handwritten equation from a real lecture",
-          "Whiteboard capture with calculus notation",
-          "Chemistry notation (molecular formulas)",
-          "Physics diagram with vectors/equations"
-        ]
-      }
+      ]
     },
     {
       id: 13,
@@ -238,16 +210,7 @@ var PresentationModule = (() => {
         { label: "Good", desc: "Screen reader successfully reading MathML equation", status: "working" },
         { label: "Bad", desc: "Screen reader hitting image with no alt text", status: "failing" },
         { label: "Inadequate", desc: 'Screen reader reading "image of mathematical formula"', status: "poor" }
-      ],
-      placeholder: {
-        type: "video",
-        instruction: "ADD VIDEO: Screen reader demonstration (60-90 seconds)",
-        suggestions: [
-          "Option A: Embedded video with three short clips",
-          "Option B: Link to external demonstration",
-          "Option C: Live demo during presentation"
-        ]
-      }
+      ]
     },
     {
       id: 14,
@@ -322,26 +285,7 @@ var PresentationModule = (() => {
       id: 18,
       type: "workflow-example",
       title: "Prompt Framework in Action",
-      subtitle: "A complete example from image to accessible content",
-      placeholder: {
-        type: "workflow-demo",
-        instruction: "ADD COMPLETE EXAMPLE: Show the full workflow",
-        example: {
-          inputImage: "[Photo of handwritten integral: \u222Bx\xB2dx]",
-          promptUsed: "You are an accessibility specialist for STEM education... This is from a Calculus I lecture on basic integration. Transcribe and provide accessible description.",
-          aiOutput: {
-            latex: "\\int x^2 \\, dx = \\frac{x^3}{3} + C",
-            screenReader: "The integral of x squared dx equals x cubed over 3 plus C",
-            altText: "Integration example: the antiderivative of x squared is x cubed divided by 3, plus constant"
-          },
-          canvasRender: "[Screenshot of how this looks in Canvas with MathJax]"
-        },
-        suggestions: [
-          "Use a real image from one of your courses",
-          "Show the actual AI conversation",
-          "Include screenshot of final Canvas page"
-        ]
-      }
+      subtitle: "A complete example from image to accessible content"
     },
     {
       id: 19,
