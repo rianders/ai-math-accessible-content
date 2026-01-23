@@ -261,11 +261,12 @@ const slides = [
     tools: [
       { name: 'Google Gemini', capability: 'Strong math OCR, LaTeX/MathML output, context understanding' },
       { name: 'ChatGPT', capability: 'Image analysis, equation transcription, explanations' },
-      { name: 'Microsoft Copilot', capability: 'Integrated with Office, good for document workflows' }
+      { name: 'Microsoft Copilot', capability: 'Integrated with Office, good for document workflows' },
+      { name: 'DeepSeek OCR Demo', capability: 'Advanced OCR for handwritten content, extracts graphs and complex math from PDFs', url: 'https://huggingface.co/spaces/merterbak/DeepSeek-OCR-Demo' }
     ],
     keypoint: 'These aren\'t replacements for ALLY—they\'re gap-fillers for the hard cases.',
     formatNote: 'Output note: AI tools output LaTeX/MathML notation. MathJax (built into Canvas) renders these formats accessibly in the browser.',
-    pipelineNote: 'AI Tool → LaTeX/MathML → Canvas → MathJax renders → Screen readers can read'
+    pipelineNote: 'AI Tool → LaTeX/MathML → Canvas → MathJax renders visually AND Screen readers read the MathML/LaTeX simultaneously'
   },
   {
     id: 16,
@@ -307,23 +308,6 @@ const slides = [
   },
   {
     id: 18,
-    type: 'ocr-demo',
-    title: 'DeepSeek OCR Demo',
-    subtitle: 'State-of-the-art OCR for extracting text and graphs from PDFs',
-    url: 'https://huggingface.co/spaces/merterbak/DeepSeek-OCR-Demo',
-    shortUrl: 'huggingface.co/spaces/merterbak/DeepSeek-OCR-Demo',
-    status: 'Demo Tool',
-    features: [
-      'Advanced OCR for handwritten content',
-      'Extract graphs and diagrams from PDFs',
-      'Transcribe complex mathematical notation',
-      'Handles multi-column layouts and scanned documents'
-    ],
-    callToAction: 'Try it with your challenging PDFs!',
-    note: 'Currently a demo - great for testing difficult content extraction'
-  },
-  {
-    id: 20,
     type: 'prompt-example',
     title: 'Example Prompt: General Images',
     subtitle: 'For photographs, diagrams, icons, and standard visuals',
@@ -356,7 +340,7 @@ AI Rules
 • Prioritize the most relevant interpretation for the learner.`
   },
   {
-    id: 20,
+    id: 19,
     type: 'prompt-example',
     title: 'Example Prompt: Math & Science Images',
     subtitle: 'For equations, graphs, scientific notation, and handwritten content',
@@ -404,7 +388,7 @@ After the HTML block, provide a brief report with these sections:
 Output the Canvas HTML first (in a code block), then the report in Markdown.`
   },
   {
-    id: 21,
+    id: 20,
     type: 'setup',
     title: 'Setting Up Your AI Workflow',
     subtitle: 'Save time with reusable configurations',
@@ -427,7 +411,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     ]
   },
   {
-    id: 22,
+    id: 21,
     type: 'demo',
     title: 'Demo: Math Notation → Accessible Text',
     description: 'Converting an equation image to accessible format',
@@ -445,7 +429,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     }
   },
   {
-    id: 23,
+    id: 22,
     type: 'demo',
     title: 'Demo: Handwritten Notes → Digital Text',
     description: 'Converting lecture whiteboard captures',
@@ -464,7 +448,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     ]
   },
   {
-    id: 24,
+    id: 23,
     type: 'workflow',
     title: 'The Complete Accessible Workflow',
     subtitle: 'Combining built-in tools with AI assistance',
@@ -485,7 +469,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
 
   // ACT 4: PRACTICE & APPLICATION
   {
-    id: 25,
+    id: 24,
     type: 'activity',
     title: 'Hands-On Activity',
     subtitle: 'Try it with challenging content',
@@ -499,7 +483,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     timeboxed: '15 minutes'
   },
   {
-    id: 26,
+    id: 25,
     type: 'discussion',
     title: 'Debrief: Comparing Results',
     questions: [
@@ -511,7 +495,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     insight: 'AI tools are powerful assistants, but human expertise remains essential for verification.'
   },
   {
-    id: 27,
+    id: 26,
     type: 'student',
     title: 'The Student Perspective',
     subtitle: 'Empowering students to help themselves',
@@ -534,7 +518,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
 
   // CLOSING
   {
-    id: 28,
+    id: 27,
     type: 'takeaways',
     title: 'Key Takeaways',
     items: [
@@ -547,7 +531,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     ]
   },
   {
-    id: 29,
+    id: 28,
     type: 'resources',
     title: 'Resources',
     resources: [
@@ -562,7 +546,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     question: 'What other challenging content types should we address in future workshops?'
   },
   {
-    id: 30,
+    id: 29,
     type: 'upcoming-workshops',
     title: 'Continue Learning',
     categories: [
@@ -592,7 +576,7 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
     ]
   },
   {
-    id: 31,
+    id: 30,
     type: 'closing',
     title: 'Thank You!',
     contacts: [
