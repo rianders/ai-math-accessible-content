@@ -573,7 +573,6 @@ Output the Canvas HTML first (in a code block), then the report in Markdown.`
         { name: "AI Resources at Rutgers", type: "Resources", url: "https://it.rutgers.edu/ai/" },
         { name: "Course Accessibility Resources", type: "Resources", url: "https://academicaffairs.rutgers.edu/course-accessibility-resources" },
         { name: "Making Math Accessible", type: "Resources", url: "https://radr.rutgers.edu/resource/making-math-accessible" },
-        { name: "Making Learning Accessible for All: Meeting ADA Title II Standards", type: "Policy" },
         { name: "PDF Inspector Tool", type: "Demo", url: "https://huggingface.co/spaces/rianders/pdfinspector" },
         { name: "DeepSeek OCR Demo", type: "Demo", url: "https://huggingface.co/spaces/merterbak/DeepSeek-OCR-Demo" },
         { name: "General Images Prompt Template", type: "Toolkit", url: "https://rianders.github.io/ai-math-accessible-content/templates/general-images-prompt.md" },
