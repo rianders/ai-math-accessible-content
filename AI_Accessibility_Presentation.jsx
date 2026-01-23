@@ -262,9 +262,16 @@ const slides = [
   },
   {
     id: 18,
-    type: 'workflow-example',
+    type: 'framework',
     title: 'Prompt Framework in Action',
-    subtitle: 'A complete example from image to accessible content'
+    heading: 'Follow these steps when creating your prompts:',
+    elements: [
+      { name: 'Step 1: Define the Role', desc: 'Set the AI\'s expertise (e.g., "You are an accessibility specialist for STEM education...")' },
+      { name: 'Step 2: Specify the Task', desc: 'Clearly state what you need (e.g., "Transcribe this equation into LaTeX and MathML...")' },
+      { name: 'Step 3: Provide Context', desc: 'Share relevant course info (e.g., "This is from a Calculus II lecture on...")' },
+      { name: 'Step 4: State the Objective', desc: 'Explain the accessibility goal (e.g., "Screen reader users should understand both notation and concept...")' },
+      { name: 'Step 5: Define Output Format', desc: 'Request specific deliverables (e.g., "Provide: 1) LaTeX, 2) Plain English reading, 3) Alt text")' }
+    ]
   },
   {
     id: 19,
