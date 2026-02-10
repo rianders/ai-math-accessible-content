@@ -19,7 +19,7 @@ This interactive presentation explores how AI can bridge accessibility gaps when
 
 ## Viewing the Presentation
 
-The presentation is hosted on GitHub Pages at: [https://rianders.github.io/ai-math-accessible-content/](https://YOUR-USERNAME.github.io/ai-math-accessible-content/)
+The presentation is hosted on GitHub Pages at: [https://rianders.github.io/ai-math-accessible-content/](https://rianders.github.io/ai-math-accessible-content/)
 
 Or open `index.html` locally in your web browser.
 
